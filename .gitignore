@@ -174,3 +174,15 @@ poetry.toml
 pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python
+
+echo "staticfiles/" >> .gitignore
+git add .gitignore
+git commit -m "Ignore staticfiles"
+
+printf "staticfiles/\n*.pyc\n__pycache__/\n.env\n.venv/\n.DS_Store\n" >> .gitignore
+git add .gitignore
+git commit -m "Stop tracking staticfiles and ignore build artifacts"
+
+grep -q '^/staticfiles/' .gitignore || echo '/staticfiles/' >> .gitignore
+git add .gitignore
+git commit -m "Ignore staticfiles (build výstup)" || true
