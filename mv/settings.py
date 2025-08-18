@@ -134,13 +134,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 TAILWIND_APP_NAME = 'theme'
 
-import os
+
+
 from pathlib import Path
-BASE_DIR = Path(__file__).resolve().parent.parent
+import os
+
+BASE_DIR = Path(__file__).resolve().parent.parent  # -> ukazuje na složku s manage.py
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [ os.path.join(BASE_DIR, "mv/static") ]   # zdroj statik – u tebe mv/static
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")          # sem se to sesbírá pro produkci
+STATICFILES_DIRS = [ BASE_DIR / "static" ]         # ⬅️ KOŘEN statik je složka "static" vedle manage.py
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = BASE_DIR / "media"

@@ -31,21 +31,33 @@
 <header class="bg-white text-black sticky top-0 z-50 shadow-md">
   <div class="max-w-7xl mx-auto px-2 py-3 flex justify-between items-center">
 
-{% load static %}
-
-<!-- Název firmy vlevo jako odkaz -->
-<a href="/" class="font-bold text-black hover:opacity-80">
-  SADROKARTONY MV
-</a>
+      <!-- Název firmy vlevo – jen pro velké displeje -->
+    <a href="/" class="hidden md:block font-bold text-black hover:opacity-80">
+      SADROKARTONY MV
+    </a>
 
     <!-- Navigace vpravo -->
     <nav class="hidden lg:flex items-center space-x-8 text-xl">
-      <a href="#about" class="inline-flex items-center h-[48px] px-2 transition duration-200 ease-in-out transform hover:-translate-y-1 hover:scale-105 hover:font-bold">O mně</a>      
-      <a href="#sluzby" class="inline-flex items-center h-[48px] px-2 transition duration-200 ease-in-out transform hover:-translate-y-1 hover:scale-105 hover:font-bold">Služby</a>
-      <a href="#realizace" class="inline-flex items-center h-[48px] px-2 transition duration-200 ease-in-out transform hover:-translate-y-1 hover:scale-105 hover:font-bold">Realizace</a>
-      <a href="#cenik" class="inline-flex items-center h-[48px] px-2 transition duration-200 ease-in-out transform hover:-translate-y-1 hover:scale-105 hover:font-bold">Ceník</a>
-      <!--<a href="#reference" class="inline-flex items-center h-[48px] px-2 transition duration-200 ease-in-out transform hover:-translate-y-1 hover:scale-105 hover:font-bold">Reference</a>-->
-      <a href="#kontakt" class="inline-flex items-center h-[48px] px-4 bg-sky-700 text-white rounded-xl transition duration-100 ease-in-out transform hover:-translate-y-1 hover:scale-105 hover:font-bold">Nezávazně poptat</a>
+      <a href="#about"
+         class="inline-flex items-center h-[48px] px-2 transition-colors duration-200 hover:font-bold">
+        O mně
+      </a>
+      <a href="#sluzby"
+         class="inline-flex items-center h-[48px] px-2 transition-colors duration-200 hover:font-bold">
+        Služby
+      </a>
+      <a href="#realizace"
+         class="inline-flex items-center h-[48px] px-2 transition-colors duration-200 hover:font-bold">
+        Realizace
+      </a>
+      <a href="{% static 'docs/cenik-sadrokartony2025.pdf' %}" download
+         class="inline-flex items-center h-[48px] px-2 transition-colors duration-200 hover:font-bold">
+        Ceník
+      </a>
+      <a href="#kontakt"
+         class="inline-flex items-center h-[48px] px-2 transition-colors duration-200 hover:font-bold">
+        Kontakt
+      </a>
 
       <!-- Kontakt napravo -->
       <div class="flex flex-col items-start pl-6 border-l border-gray-300 text-base leading-tight">
@@ -55,33 +67,59 @@
     </nav>
 
   </div>
+
+
 </header>
 
-    <!-- Mobile menu toggle -->
-    <button id="menu-toggle" class="md:hidden">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-           viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 6h16M4 12h16M4 18h16"/>
-      </svg>
-    </button>
-  </div>
+<!-- Horní lišta pro mobily -->
+<div class="flex items-center justify-between px-4 py-3 md:hidden bg-white shadow">
+  <!-- Logo vlevo -->
+  <a href="/" class="font-bold text-black">SADROKARTONY MV</a>
 
-  <!-- Mobilní menu -->
-  <div id="mobile-menu" class="md:hidden hidden px-2 pb-4 bg-sky-700">
-    <a href="#about" class="block py-2 text-white hover:font-bold">O mně</a>
-    <a href="#sluzby" class="block py-2 text-white hover:font-bold">Služby</a>
-    <a href="#kalkulacka" class="block py-2 text-white hover:font-bold">Kalkulačka</a>
-    <a href="#reference" class="block py-2 text-white hover:font-bold">Reference</a>
-    <a href="#kontakt" class="block py-2 text-white hover:font-bold">Kontakt</a>
-  </div>
-</header>
+  <!-- Hamburger vpravo -->
+  <button id="menu-toggle" class="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+         viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+  </button>
+</div>
+
+<!-- Mobilní menu overlay -->
+<div id="mobile-menu" class="hidden fixed inset-0 flex items-start justify-center pt-20 bg-black bg-opacity-40 z-50">
+  <nav class="bg-sky-700 rounded-2xl shadow-xl w-72 py-6 px-4 flex flex-col space-y-4 text-center">
+    <a href="#about" class="menu-link text-white text-lg hover:font-bold">O mně</a>
+    <a href="#sluzby" class="menu-link text-white text-lg hover:font-bold">Služby</a>
+    <a href="#realizace" class="menu-link text-white text-lg hover:font-bold">Realizace</a>
+    <a href="{% static 'docs/cenik-sadrokartony2025.pdf' %}" 
+       download class="menu-link text-white text-lg hover:font-bold">Ceník</a>
+    <a href="#kontakt" class="menu-link text-white text-lg hover:font-bold">Kontakt</a>
+  </nav>
+</div>
+
+<script>
+  const toggleBtn = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const links = document.querySelectorAll('#mobile-menu .menu-link');
+
+  // přepínání menu
+  toggleBtn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+
+  // zavření menu po kliknutí na odkaz
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      menu.classList.add('hidden');
+    });
+  });
+</script>
 
 <!-- Hero – světlý moderní design s modrým panelem -->
 <section class="relative overflow-hidden">
   <!-- Pozadí -->
-  <img
-    src="{% static 'images/foto_01.JPG' %}"
-    alt="Sádrokartonové práce"
+{% load static %}
+  <img src="{% static 'images/uvodni.jpg' %}" alt="Sádrokartonové práce"
     class="absolute inset-0 w-full h-full object-cover brightness-110"
   />
 
@@ -89,48 +127,108 @@
   <div class="absolute inset-0 pointer-events-none">
     <div class="absolute inset-0 bg-gradient-to-r from-sky-100/70 via-sky-50/50 to-transparent"></div>
   </div>
+  
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+<!-- Obsah pro PC (skrytý na mobilech) -->
+<div class="relative z-10 hidden md:block">
+  <div class="max-w-7xl mx-auto px-6 md:px-8">
+    <div class="min-h-[70vh] flex items-center">
 
-  <!-- Obsah -->
-  <div class="relative z-10">
-    <div class="max-w-7xl mx-auto px-6 md:px-8">
-      <div class="min-h-[70vh] flex items-center">
+      <!-- Textový box -->
+      <div class="inline-block bg-sky-50/80 backdrop-blur-sm shadow-md rounded-2xl p-6 md:p-10">
         
-        <!-- Textový box -->
-        <div class="bg-sky-50/80 backdrop-blur-sm shadow-md rounded-2xl p-6 md:p-10 max-w-xl">
-          <!-- Předtitulek -->
-          <div class="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-full text-xs md:text-sm font-semibold text-sky-900 bg-sky-200/80 ring-1 ring-sky-300">
-            • Sádrokartonář pro Středočeský kraj
-          </div>
+        <!-- Předtitulek -->
+        <div class="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-xl text-xs md:text-sm font-semibold text-sky-900 bg-sky-200/80 ring-1 ring-sky-300">
+          • Sádrokartonář pro Středočeský kraj
+        </div>
 
-          <!-- Nadpis ve dvou řádcích -->
-          <h1 class="font-extrabold leading-tight tracking-tight text-3xl md:text-5xl text-gray-800">
-            <span class="block">Sádrokartonové práce</span>
-            <span class="block">s jistotou kvality</span>
-          </h1>
+        <!-- Nadpis -->
+        <h1 class="font-medium tracking-tight text-3xl md:text-5xl text-gray-900 text-center leading-relaxed">
+          <span class="block">Sádrokartonářské práce</span>
+          <span class="block">pro váš domov i firmu</span>
+        </h1>
 
-          <!-- Podnadpis -->
-          <p class="mt-4 text-gray-800 text-base md:text-lg">
-            Poctivé řemeslo • Férová cena • Osobní přístup
-          </p>
-
-          <!-- CTA -->
-          <div class="mt-6 flex flex-col sm:flex-row gap-3">
-            <a href="#kalkulacka"
-               class="inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold text-white bg-sky-700 hover:bg-sky-800 transition">
-              Aktuální ceník
+        <!-- Oddělovač a CTA s podnadpisem vlevo -->
+        <div class="mt-6 pt-6 border-t border-sky-200/70">
+          <div class="flex flex-col md:flex-row items-center md:justify-between gap-4">
+            
+            <!-- Podnadpis vlevo -->
+            <p class="text-sm md:text-base text-gray-600 text-center md:text-left">
+              Když chcete jistotu, 
+              <span class="block">že to bude udělané pořádně.</span>
+            </p>
+            
+            <a href="#kontakt"
+               class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-lg font-semibold text-white
+                      bg-sky-700 hover:bg-sky-800 focus:outline-none focus:ring-4 focus:ring-sky-300
+                      transition-colors duration-200 shadow-md">
+              Získat nabídku
             </a>
+          
+          </div>
+        </div>
 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Obsah pro mobily (zobrazený jen na mobilech) -->
+<div class="relative z-10 md:hidden">
+  <div class="max-w-md mx-auto px-4">
+    <div class="min-h-[70vh] flex items-center justify-center">
+
+      <!-- Textový box -->
+      <div class="w-full text-center bg-sky-50/80 backdrop-blur-sm shadow-md rounded-2xl p-6">
+        
+        <!-- Předtitulek -->
+        <div class="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-xl 
+                    text-xs font-semibold text-sky-900 
+                    bg-sky-200/80 ring-1 ring-sky-300">
+          • Sádrokartonář pro Středočeský kraj
+        </div>
+
+        <!-- Nadpis -->
+        <h1 class="font-medium tracking-tight text-3xl text-gray-900 leading-relaxed mb-4">
+          <span class="block">Sádrokartonářské práce</span>
+          <span class="block">pro váš domov i firmu</span>
+        </h1>
+
+        <!-- Podnadpis -->
+        <p class="text-sm text-gray-600 mb-6">
+          Když chcete jistotu, 
+          <span class="block">že to bude udělané pořádně.</span>
+        </p>
+
+        <!-- Tlačítko -->
+        <a href="#kontakt"
+           class="inline-flex items-center justify-center px-8 py-3 rounded-xl 
+                  text-lg font-semibold text-white bg-sky-700 hover:bg-sky-800 
+                  focus:outline-none focus:ring-4 focus:ring-sky-300 
+                  transition-colors duration-200 shadow-md">
+          Získat nabídku
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+            <!-- Stáhnout ceník
             <a href="{% static 'docs/cenik-sadrokartony.pdf' %}" 
               download
               class="btn">
               Stáhnout ceník (PDF)
-          
-            </a>
-            <a href="#kontakt"
-               class="inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold text-sky-900 bg-sky-100/80 hover:bg-sky-200 transition ring-1 ring-sky-300">
-              Nezávazná poptávka
-            </a>
-          </div>
+            </a>-->
+
+                <!-- Vedlejší tlačítko
+          <a href="#realizace"
+            class="inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold text-sky-700 border border-sky-700 hover:bg-sky-50 transition">
+            Podívat se na realizace
+          </a> -->
+      </div>
 
           <!-- Důvěry 
           <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-gray-800 text-sm">
@@ -186,7 +284,7 @@
     
     <!-- Levý blok s fotkou -->
     <div id="aboutImage" class="flex justify-center transform opacity-0 -translate-x-20 transition-all duration-[2000ms] ease-out">
-      <img src="{% static 'images/oblicej.jpg' %}" 
+      <img src="{% static 'images/omne.jpg' %}" 
            alt="Martin Vodička" 
            class="w-72 h-auto rounded-lg shadow-lg object-cover">
     </div>
@@ -236,7 +334,7 @@
   <div class="max-w-6xl mx-auto px-6">
     
     <!-- Nadpis -->
-    <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Můj přístup</h2>
+    <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Proč si vybrat právě mě</h2>
     <p class="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto text-center mb-8">
       Na své práci si dávám záležet a neustále se vzdělávám, abych držel krok s moderními technologiemi a postupy.
       Mým cílem je, aby výsledek nejen splnil, ale i předčil vaše očekávání.
@@ -250,15 +348,15 @@
       </div>
       <div class="bg-gray-50 p-4 rounded-lg shadow-sm text-center">
         <span class="block font-semibold text-sky-700 text-lg mb-1">Jasná komunikace</span>
-        <span class="text-sm text-gray-600">O všem budete vědět dopředu.</span>
+        <span class="text-sm text-gray-600">O všem budete vědět dopředu</span>
       </div>
       <div class="bg-gray-50 p-4 rounded-lg shadow-sm text-center">
         <span class="block font-semibold text-sky-700 text-lg mb-1">Flexibilita</span>
-        <span class="text-sm text-gray-600">Přizpůsobím se vašemu provozu.</span>
+        <span class="text-sm text-gray-600">Přizpůsobím se vašemu provozu</span>
       </div>
       <div class="bg-gray-50 p-4 rounded-lg shadow-sm text-center">
         <span class="block font-semibold text-sky-700 text-lg mb-1">Čistota po práci</span>
-        <span class="text-sm text-gray-600">Po sobě vždy uklidím.</span>
+        <span class="text-sm text-gray-600">Po sobě vždy uklidím</span>
       </div>
     </div>
 
@@ -267,13 +365,13 @@
 <!-- Služby -->
 <section id="sluzby" class="py-10 bg-gray-50 scroll-mt-24">
   <div class="max-w-6xl mx-auto px-6">
-    <h2 class="text-3xl font-bold text-center mb-12">Realizuji pro vás</h2>
+    <h2 class="text-3xl font-bold text-center mb-12">Moje služby</h2>
     
     <!-- Grid s kartami -->
     <div class="grid md:grid-cols-3 gap-10">
       
       <div class="bg-white shadow-md rounded-lg p-6 text-center">
-        <img src="{% static 'images/sluzby_1.jpeg' %}" 
+        <img src="{% static 'images/sluzby1.jpg' %}" 
              class="w-full h-[200px] object-cover mb-4 rounded" 
              alt="Montáž sádrokartonu">
         <h3 class="text-xl font-semibold mb-1">Montáž sádrokartonu</h3>
@@ -282,7 +380,7 @@
       </div>
       
       <div class="bg-white shadow-md rounded-lg p-6 text-center">
-        <img src="{% static 'images/sluzby_2.jpg' %}" 
+        <img src="{% static 'images/sluzby2.jpg' %}" 
              class="w-full h-[200px] object-cover mb-4 rounded" 
              alt="Izolace">
         <h3 class="text-xl font-semibold mb-1">Podhledy a kazetové stropy</h3>
@@ -291,7 +389,7 @@
       </div>
       
       <div class="bg-white shadow-md rounded-lg p-6 text-center">
-        <img src="{% static 'images/sluzby_3.jpeg' %}" 
+        <img src="{% static 'images/sluzby3.jpg' %}" 
              class="w-full h-[200px] object-cover mb-4 rounded" 
              alt="Interiérové práce">
         <h3 class="text-xl font-semibold mb-1">Dokončovací práce</h3>
@@ -301,13 +399,159 @@
 
     </div>
 
-    <!-- Tlačítko pod kartami -->
-<div class="flex justify-center mt-14">
+<!-- ======================= REALIZACE ======================= -->
+<section id="realizace" class="py-14 bg-gray-50 scroll-mt-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center mb-10">Moje realizace</h2>
+
+    <div class="space-y-6">
+
+      <!-- Zakázka 1 -->
+      <article class="bg-white rounded-xl shadow-md overflow-hidden">
+        <button class="w-full flex items-center justify-between p-5 text-left group" data-acc="toggle">
+          <div>
+            <h3 class="text-xl font-semibold">Koupelna</h3>
+            <!--<p class="text-gray-600 text-sm">SDK podhled v obýváku, příčky 75&nbsp;mm, tmelení Q2</p>-->
+          </div>
+          <span class="ml-4 inline-block transition-transform group-aria-expanded:rotate-180">
+            <!-- šipka -->
+            <svg class="w-6 h-6 text-gray-500" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+
+        <div class="px-5 pb-6 hidden" data-acc="panel">
+          <!-- Nahraj fotky do: static/images/realizace/zakazka-01/01.jpg ... -->
+          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <a href="{% static 'images/realizace/koupelna1.jpg' %}" class="rlz-photo" data-gallery="zak01">
+              <img src="{% static 'images/realizace/koupelna1.jpg' %}" loading="lazy" alt="Zakázka 1 – foto 1" class="w-full h-56 object-cover rounded-lg shadow-sm">
+            </a>
+            <a href="{% static 'images/realizace/koupelna2.jpg' %}" class="rlz-photo" data-gallery="zak01">
+              <img src="{% static 'images/realizace/koupelna2.jpg' %}" loading="lazy" alt="Zakázka 1 – foto 2" class="w-full h-56 object-cover rounded-lg shadow-sm">
+            </a>
+            <a href="{% static 'images/realizace/koupelna3.jpg' %}" class="rlz-photo" data-gallery="zak01">
+              <img src="{% static 'images/realizace/koupelna3.jpg' %}" loading="lazy" alt="Zakázka 1 – foto 3" class="w-full h-56 object-cover rounded-lg shadow-sm">
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Zakázka 2 -->
+      <article class="bg-white rounded-xl shadow-md overflow-hidden">
+        <button class="w-full flex items-center justify-between p-5 text-left group" data-acc="toggle">
+          <div>
+            <h3 class="text-xl font-semibold">Kanceláře</h3>
+            <!--<p class="text-gray-600 text-sm">Předstěny CW 50, minerální izolace 50&nbsp;mm, desky RBI</p>-->
+          </div>
+          <span class="ml-4 inline-block transition-transform group-aria-expanded:rotate-180">
+            <svg class="w-6 h-6 text-gray-500" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+
+        <div class="px-5 pb-6 hidden" data-acc="panel">
+          <!-- Nahraj fotky do: static/images/realizace/zakazka-02/01.jpg ... -->
+          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <a href="{% static 'images/realizace/kancelar1.jpg' %}" class="rlz-photo" data-gallery="zak02">
+              <img src="{% static 'images/realizace/kancelar1.jpg' %}" loading="lazy" alt="Zakázka 2 – foto 1" class="w-full h-56 object-cover rounded-lg shadow-sm">
+            </a>
+            <a href="{% static 'images/realizace/kancelar2.jpg' %}" class="rlz-photo" data-gallery="zak02">
+              <img src="{% static 'images/realizace/kancelar2.jpg' %}" loading="lazy" alt="Zakázka 2 – foto 2" class="w-full h-56 object-cover rounded-lg shadow-sm">
+            </a>
+            <a href="{% static 'images/realizace/kancelar3.jpg' %}" class="rlz-photo" data-gallery="zak02">
+              <img src="{% static 'images/realizace/kancelar3.jpg' %}" loading="lazy" alt="Zakázka 2 – foto 3" class="w-full h-56 object-cover rounded-lg shadow-sm">
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Zakázka 3 (ukázka další) -->
+      <article class="bg-white rounded-xl shadow-md overflow-hidden">
+        <button class="w-full flex items-center justify-between p-5 text-left group" data-acc="toggle">
+          <div>
+            <h3 class="text-xl font-semibold">Protipožární konstrukce</h3>
+            <!--<p class="text-gray-600 text-sm">Minerální kazety 600×600, přestavba osvětlení</p>-->
+          </div>
+          <span class="ml-4 inline-block transition-transform group-aria-expanded:rotate-180">
+            <svg class="w-6 h-6 text-gray-500" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+
+        <div class="px-5 pb-6 hidden" data-acc="panel">
+          <!-- Nahraj fotky do: static/images/realizace/zakazka-03/01.jpg ... -->
+          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <a href="{% static 'images/realizace/protipozar1.jpg' %}" class="rlz-photo" data-gallery="zak03">
+              <img src="{% static 'images/realizace/protipozar1.jpg' %}" loading="lazy" alt="Zakázka 3 – foto 1" class="w-full h-56 object-cover rounded-lg shadow-sm">
+            </a>
+            <a href="{% static 'images/realizace/protipozar2.jpg' %}" class="rlz-photo" data-gallery="zak03">
+              <img src="{% static 'images/realizace/protipozar2.jpg' %}" loading="lazy" alt="Zakázka 3 – foto 2" class="w-full h-56 object-cover rounded-lg shadow-sm">
+            </a>
+            <a href="{% static 'images/realizace/protipozar3.jpg' %}" class="rlz-photo" data-gallery="zak03">
+              <img src="{% static 'images/realizace/protipozar3.jpg' %}" loading="lazy" alt="Zakázka 3 – foto 3" class="w-full h-56 object-cover rounded-lg shadow-sm">
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox (zvětšení fotky) -->
+<div id="rlz-lightbox" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-[60]">
+  <img id="rlz-lightbox-img" class="max-w-[92vw] max-h-[92vh] rounded-lg shadow-2xl" alt="Náhled realizace">
+  <button id="rlz-lightbox-close" class="absolute top-4 right-4 text-white text-3xl leading-none px-3">×</button>
+</div>
+
+<!-- Akordeon + Lightbox skript -->
+<script>
+  // Akordeon
+  document.querySelectorAll('[data-acc="toggle"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const panel = btn.parentElement.querySelector('[data-acc="panel"]');
+      const isHidden = panel.classList.contains('hidden');
+      // zavři ostatní
+      document.querySelectorAll('[data-acc="panel"]').forEach(p => p.classList.add('hidden'));
+      // otevři aktuální
+      if (isHidden) panel.classList.remove('hidden');
+    });
+  });
+
+  // Lightbox
+  const lb = document.getElementById('rlz-lightbox');
+  const lbImg = document.getElementById('rlz-lightbox-img');
+  const lbClose = document.getElementById('rlz-lightbox-close');
+
+  document.querySelectorAll('.rlz-photo').forEach(a => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      lbImg.src = a.getAttribute('href');
+      lb.classList.remove('hidden');
+      lb.classList.add('flex');
+    });
+  });
+
+  function closeLb() {
+    lb.classList.add('hidden');
+    lb.classList.remove('flex');
+    lbImg.src = '';
+  }
+  lbClose.addEventListener('click', closeLb);
+  lb.addEventListener('click', (e) => { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLb(); });
+</script>
+
+   <!-- Tlačítko pod kartami -->
+<div class="flex justify-center ">
   <a href="#kontakt"
-     class="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-white text-lg
-            bg-sky-700 
-            ">
-    Nezávazná poptávka
+     class="inline-flex items-center justify-center px-8 py-4 font-semibold text-white text-lg
+            bg-sky-700 hover:bg-sky-800  rounded-xl transition
+            "> 
+    Mám zájem o spolupráci
   </a>
 </div>
     
@@ -405,83 +649,107 @@
   }
 </script>
 
-<!-- Reference -->
-
 <section id="reference" class="py-20 bg-gray-50 scroll-mt-24">
-  <div class="max-w-5xl mx-auto px-6">
+  <div class="max-w-5xl mx-auto px-3">
     <h2 class="text-3xl font-bold text-center mb-12">Spokojení zákazníci</h2>
+
     <div class="grid md:grid-cols-2 gap-8">
-      <div class="bg-white p-6 rounded shadow flex gap-4 items-start">
-        <img src="https://picsum.photos/seed/zakaznik1/80" class="w-16 h-16 rounded-full" alt="Zákazník" />
+
+      <!-- 1. reference -->
+      <div class="bg-white p-6 rounded-xl shadow flex gap-4 items-start">
+        <!-- Kolečko s iniciálami -->
+        <div class="w-16 h-16 aspect-square shrink-0 rounded-full bg-sky-700
+                    text-white font-bold text-lg flex items-center justify-center shadow-md">
+          RH
+        </div>
         <div>
           <p class="italic">„Kvalitně udělaný podhled, vše rovné, spáry nikde a uklizeno!“</p>
-          <p class="text-sm text-gray-500 mt-2">— Radim Husák, Praha</p>
+          <p class="text-sm text-gray-500 mt-2">— Radim Husák, Brno</p>
         </div>
       </div>
-      <div class="bg-white p-6 rounded shadow flex gap-4 items-start">
-        <img src="https://picsum.photos/seed/zakaznik2/80" class="w-16 h-16 rounded-full" alt="Zákazník" />
+
+      <!-- 2. reference -->
+      <div class="bg-white p-6 rounded-xl shadow flex gap-4 items-start">
+        <!-- Kolečko s iniciálami -->
+        <div class="w-16 h-16 aspect-square shrink-0 rounded-full bg-sky-700
+                    text-white font-bold text-lg flex items-center justify-center shadow-md">
+          PH
+        </div>
         <div>
           <p class="italic">„Skvělá domluva a precizní práce. Všechno hotové, jak jsme se dohodli.“</p>
-          <p class="text-sm text-gray-500 mt-2">— Petra Horová, Brno</p>
+          <p class="text-sm text-gray-500 mt-2">— Petra Horová, Praha</p>
         </div>
       </div>
+
     </div>
   </div>
 </section>
-
-<!-- Sekce kontaktního formuláře -->
-<section id="kontakt" class="py-15 bg-white">
-  <div class="max-w-3xl mx-auto px-6 bg-white shadow-md rounded-md p-8">
-    <h2 class="text-3xl font-bold mb-4 text-center">Máte zájem o spolupráci?</h2>
-    <p class="text-gray-600 mb-8 text-center">
-      Vyplňte prosím své údaje a popis zakázky. Ozvu se vám obvykle do 24 hodin. <br>Veškeré informace zpracovávám osobně a s maximální důvěrností.
-    </p>
-
-    <form class="space-y-3">
+<!-- Sekce kontakt – rozdělený formulář -->
+<section id="kontakt" class="py-16 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-10 items-start">
+      
+      <!-- LEVÝ SLOUPEC: Text + kontakty -->
       <div>
-        <label class="block font-semibold mb-1">Jméno a příjmení <span class="text-red-500">*</span></label>
-        <input type="text" required placeholder="Anička Spokojená" class="w-full border border-gray-300 rounded px-4 py-2" />
-      </div>
+        <h2 class="text-4xl font-bold mb-6">Máte zájem o spolupráci?</h2>
+        <p class="text-2xl text-gray-600 mb-8">
+          Napište mi a já se vám brzy ozvu s návrhem řešení.
+        </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label class="block font-semibold mb-1">Telefon <span class="text-red-500">*</span></label>
-          <input type="tel" required placeholder="+420 777 123 456" class="w-full border border-gray-300 rounded px-4 py-2" />
+        <!-- Telefon -->
+        <div class="flex items-center text-2xl font-bold text-sky-700 mb-3">
+          <span class="mr-3">📞</span>
+          <a href="tel:+420776478807" class="hover:underline">+420&nbsp;776&nbsp;478&nbsp;807</a>
         </div>
-        <div>
-          <label class="block font-semibold mb-1">E-mail</label>
-          <input type="email" placeholder="jsemtuprovas@email.cz" class="w-full border border-gray-300 rounded px-4 py-2" />
+
+        <!-- E-mail -->
+        <div class="flex items-center text-xl font-semibold text-gray-800">
+          <span class="mr-3">✉️</span>
+          <a href="mailto:info@sadrokartony-mv.cz" class="hover:underline">info@sadrokartony-mv.cz</a>
         </div>
       </div>
 
-      <div>
-        <label class="block font-semibold mb-1">Lokalita realizace</label>
-        <input type="text" placeholder="Kladno, Beroun, Příbram..." class="w-full border border-gray-300 rounded px-2 py-2" />
-      </div>
+      <!-- PRAVÝ SLOUPEC: Formulář -->
+      <form class="space-y-4 bg-white border border-gray-500 rounded-xl p-6 shadow-sm">
+        <!-- 2 sloupce nahoře -->
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <input type="text" required placeholder="Jméno a příjmení *"
+                   class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sky-300 mb-4">
+            <input type="tel" required placeholder="Telefonní číslo *"
+                   class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sky-300">
+          </div>
+          <div>
+            <input type="email" placeholder="E-mail"
+                   class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sky-300 mb-4">
+            <input type="text" placeholder="Lokalita realizace"
+                   class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sky-300">
+          </div>
+        </div>
 
-      <div>
-        <label class="block font-semibold mb-1">Popis zakázky</label>
-        <textarea rows="4" placeholder="Např. SDK strop 40 m², RD novostavba..." class="w-full border border-gray-300 rounded px-4 py-2"></textarea>
-      </div>
+        <!-- Textová zpráva -->
+        <textarea rows="4" placeholder="Popis zakázky"
+                  class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sky-300"></textarea>
 
-      <div>
-        <label class="block font-semibold mb-1">Příloha (volitelné)</label>
-        <input type="file" class="w-full text-gray-600" />
-      </div>
+        <!-- Odeslat -->
+        <button type="submit"
+                class="w-full bg-sky-700 hover:bg-sky-800 text-white font-semibold py-3 rounded-lg transition">
+          Odeslat
+        </button>
 
-      <button type="submit" class="w-full bg-sky-700 hover:bg-sky-800 text-white font-bold py-3 rounded transition">
-        Odeslat poptávku
-      </button>
-    </form>
+        <!--<p class="text-xs text-gray-500 text-center">
+          Odesláním souhlasíte se zpracováním údajů pro vyřízení poptávky.
+        </p>-->
+      </form>
+    </div>
   </div>
 </section>
-
 <!-- Footer -->
 <footer class="bg-sky-700 text-white py-6">
-  <div class="max-w-6xl mx-auto px-6 text-center text-sm">
-    © 2025 Sádrokartonář Martin Vodička · IČO 22193758 ·
-    <a href="mailto:info@example.com" class="underline">info@sadrokartony-mv.cz</a> ·
-    <a href="tel:+420777123456" class="underline">+420 776 478 807</a>
+  <div class="max-w-6xl mx-10 text-sm">
+    © 2025 Sádrokartonář Martin Vodička · IČO 22193758
+    <!--<a href="mailto:info@example.com" class="underline">info@sadrokartony-mv.cz</a> ·
+    <a href="tel:+420777123456" class="underline">+420 776 478 807</a>-->
   </div>
 </footer>
 
