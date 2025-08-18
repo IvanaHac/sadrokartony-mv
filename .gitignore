@@ -186,3 +186,10 @@ git commit -m "Stop tracking staticfiles and ignore build artifacts"
 grep -q '^/staticfiles/' .gitignore || echo '/staticfiles/' >> .gitignore
 git add .gitignore
 git commit -m "Ignore staticfiles (build výstup)" || true
+
+staticfiles/
+
+*.pyc
+
+.venv/
+.DS_Store
