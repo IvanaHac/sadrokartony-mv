@@ -46,6 +46,10 @@
          class="inline-flex items-center h-[48px] px-2 transition-colors duration-200 hover:font-bold">
         Služby
       </a>
+       <a href="#procja"
+         class="inline-flex items-center h-[48px] px-2 transition-colors duration-200 font-semibold hover:font-bold">
+        Proč právě já
+      </a>
       <a href="#realizace"
          class="inline-flex items-center h-[48px] px-2 transition-colors duration-200 hover:font-bold">
         Realizace
@@ -59,11 +63,11 @@
         Kontakt
       </a>
 
-      <!-- Kontakt napravo -->
+      <!-- Kontakt napravo 
       <div class="flex flex-col items-start pl-6 border-l border-gray-300 text-base leading-tight">
         <span class="font-bold text-sky-700">📞 +420 776 478 807</span>
         <span class="text-gray-600">✉️ info@sadrokartony-mv.cz</span>
-      </div>
+      </div>-->
     </nav>
 
   </div>
@@ -86,478 +90,656 @@
 </div>
 
 <!-- Mobilní menu overlay -->
-<div id="mobile-menu" class="hidden fixed inset-0 flex items-start justify-center pt-20 bg-black bg-opacity-40 z-50">
-  <nav class="bg-sky-700 rounded-2xl shadow-xl w-72 py-6 px-4 flex flex-col space-y-4 text-center">
-    <a href="#about" class="menu-link text-white text-lg hover:font-bold">O mně</a>
-    <a href="#sluzby" class="menu-link text-white text-lg hover:font-bold">Služby</a>
-    <a href="#realizace" class="menu-link text-white text-lg hover:font-bold">Realizace</a>
-   <!--<a href="{% static 'docs/cenik-sadrokartony2025.pdf' %}" 
-       download class="menu-link text-white text-lg hover:font-bold">Ceník</a>-->
-    <a href="#kontakt" class="menu-link text-white text-lg hover:font-bold">Kontakt</a>
+<div id="mobile-menu" class="hidden fixed inset-0 flex items-start justify-center pt-0 bg-black bg-opacity-40 z-50">
+  <!-- zastavíme kliknutí na samotné menu, aby se nezavřelo -->
+  <nav class="bg-white rounded-2xl shadow-xl w-80 sm:w-96 py-20 px-12 flex flex-col space-y-8 text-center" id="menu-box">
+    <a href="#about" class="menu-link text-sky-900 text-2xl hover:font-bold">O mně</a>
+    <a href="#sluzby" class="menu-link text-sky-900 text-2xl hover:font-bold">Služby</a>
+    <a href="#procja" class="menu-link text-sky-900 font-semibold text-2xl hover:font-bold">Proč právě já</a>
+    <a href="#realizace" class="menu-link text-sky-900 text-2xl hover:font-bold">Realizace</a>
+
+    <!--<a href="{% static 'docs/cenik-sadrokartony2025.pdf' %}" 
+        download class="menu-link text-white text-lg hover:font-bold">Ceník</a>-->
+    <a href="#kontakt" class="menu-link text-sky-900 text-2xl hover:font-bold">Kontakt</a>
   </nav>
 </div>
 
 <script>
   const toggleBtn = document.getElementById('menu-toggle');
   const menu = document.getElementById('mobile-menu');
+  const menuBox = document.getElementById('menu-box');
   const links = document.querySelectorAll('#mobile-menu .menu-link');
 
-  // přepínání menu
+  // otevření / zavření přes hamburger
   toggleBtn.addEventListener('click', () => {
     menu.classList.toggle('hidden');
   });
 
-  // zavření menu po kliknutí na odkaz
+  // zavření při kliknutí na položku
   links.forEach(link => {
     link.addEventListener('click', () => {
       menu.classList.add('hidden');
     });
   });
+
+  // zavření při kliknutí mimo menu (na overlay)
+  menu.addEventListener('click', (e) => {
+    if (!menuBox.contains(e.target)) {
+      menu.classList.add('hidden');
+    }
+  });
 </script>
-
-<!-- Hero – světlý moderní design s modrým panelem -->
-<section class="relative overflow-hidden">
-  <!-- Pozadí -->
 {% load static %}
-  <img src="{% static 'images/uvodni.jpg' %}" alt="Sádrokartonové práce"
-    class="absolute inset-0 w-full h-full object-cover brightness-110"
-  />
-
-  <!-- Modrý průhledný gradient zleva -->
-  <div class="absolute inset-0 pointer-events-none">
-    <div class="absolute inset-0 bg-gradient-to-r from-sky-100/70 via-sky-50/50 to-transparent"></div>
-  </div>
-  
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
-<!-- Obsah pro PC (skrytý na mobilech) -->
-<div class="relative z-10 hidden md:block">
-  <div class="max-w-7xl mx-auto px-6 md:px-8">
-    <div class="min-h-[70vh] flex items-center">
 
-      <!-- Textový box -->
-      <div class="inline-block bg-sky-50/80 backdrop-blur-sm shadow-md rounded-2xl p-6 md:p-10">
-        
-        <!-- Předtitulek -->
-        <div class="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-xl text-xs md:text-sm font-semibold text-sky-900 bg-sky-200/80 ring-1 ring-sky-300">
-          • Sádrokartonář pro Středočeský kraj
-        </div>
+<!-- ================= DESKTOP HERO ================= -->
+<section class="relative overflow-hidden min-h-[92vh] hidden lg:block">
+  <img src="{% static 'images/Uvodnifoto.jpg' %}" alt="Sádrokartonové práce"
+       class="absolute inset-0 -z-10 w-full h-full object-cover object-top">
 
-        <!-- Nadpis -->
-        <h1 class="font-medium tracking-tight text-3xl md:text-5xl text-gray-900 text-center leading-relaxed">
-          <span class="block">Sádrokartonářské práce</span>
-          <span class="block">pro váš domov i firmu</span>
-        </h1>
+  <!-- Puntíkovaný pattern vpravo dole -->
+  <div class="absolute bottom-10 right-10 w-48 h-48 -z-10
+              [background-image:radial-gradient(circle,rgba(2,132,199,0.5)_1px,transparent_1px)];
+              [background-size:20px_20px]"></div>
 
-        <!-- Oddělovač a CTA s podnadpisem vlevo -->
-        <div class="mt-6 pt-6 border-t border-sky-200/70">
-          <div class="flex flex-col md:flex-row items-center md:justify-between gap-4">
-            
-            <!-- Podnadpis vlevo -->
-            <p class="text-sm md:text-base text-gray-600 text-center md:text-left">
-              Když chcete jistotu, 
-              <span class="block">že to bude udělané pořádně.</span>
-            </p>
-            
-            <a href="#kontakt"
-               class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-lg font-semibold text-white
-                      bg-sky-700 hover:bg-sky-800 focus:outline-none focus:ring-4 focus:ring-sky-300
-                      transition-colors duration-200 shadow-md">
-              Získat nabídku
-            </a>
-          
+  <!-- Obsah -->
+  <div class="relative z-10">
+    <div class="max-w-7xl mx-auto px-8 md:px-20 md:py-10">
+      <div class="min-h-[80vh] flex items-center">
+        <div class="inline-block bg-white/75 backdrop-blur-sm rounded-2xl p-6 md:p-10 shadow-xl ring-1 ring-white/60">
+          <div class="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-xl text-xs md:text-sm font-semibold text-sky-900 bg-sky-200/90 ring-1 ring-sky-300/70">
+            • Sádrokartonář pro Středočeský kraj
+          </div>
+          <h1 class="font-extrabold tracking-tight text-3xl md:text-5xl text-gray-900 text-center leading-relaxed">
+            <span class="block">Sádrokartonářské práce</span>
+            <span class="block">pro váš domov</span>
+          </h1>
+          <div class="mt-6 pt-6 border-t border-sky-200/60">
+            <div class="flex flex-col md:flex-row items-center md:justify-between gap-4">
+              <p class="text-sm md:text-base text-gray-700 text-center md:text-left">
+                Když chcete jistotu,
+                <span class="block">že to bude udělané pořádně.</span>
+              </p>
+              <a href="#kontakt"
+                 class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-lg font-semibold text-white
+                        bg-sky-700 hover:bg-sky-800 focus:outline-none focus:ring-4 focus:ring-sky-300 transition-colors shadow-md">
+                Poptat realizaci
+              </a>
+            </div>
           </div>
         </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Obsah pro mobily (zobrazený jen na mobilech) -->
-<div class="relative z-10 md:hidden">
-  <div class="max-w-md mx-auto px-4">
-    <div class="min-h-[70vh] flex items-center justify-center">
-
-      <!-- Textový box -->
-      <div class="w-full text-center bg-sky-50/80 backdrop-blur-sm shadow-md rounded-2xl p-6">
-        
-        <!-- Předtitulek -->
-        <div class="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-xl 
-                    text-xs font-semibold text-sky-900 
-                    bg-sky-200/80 ring-1 ring-sky-300">
-          • Sádrokartonář pro Středočeský kraj
-        </div>
-
-        <!-- Nadpis -->
-        <h1 class="font-medium tracking-tight text-3xl text-gray-900 leading-relaxed mb-4">
-          <span class="block">Sádrokartonářské práce</span>
-          <span class="block">pro váš domov i firmu</span>
-        </h1>
-
-        <!-- Podnadpis -->
-        <p class="text-sm text-gray-600 mb-6">
-          Když chcete jistotu, 
-          <span class="block">že to bude udělané pořádně.</span>
-        </p>
-
-        <!-- Tlačítko -->
-        <a href="#kontakt"
-           class="inline-flex items-center justify-center px-8 py-3 rounded-xl 
-                  text-lg font-semibold text-white bg-sky-700 hover:bg-sky-800 
-                  focus:outline-none focus:ring-4 focus:ring-sky-300 
-                  transition-colors duration-200 shadow-md">
-          Získat nabídku
-        </a>
-
-      </div>
-
-    </div>
-  </div>
-</div>
-
-
-            <!-- Stáhnout ceník
-            <a href="{% static 'docs/cenik-sadrokartony.pdf' %}" 
-              download
-              class="btn">
-              Stáhnout ceník (PDF)
-            </a>-->
-
-                <!-- Vedlejší tlačítko
-          <a href="#realizace"
-            class="inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold text-sky-700 border border-sky-700 hover:bg-sky-50 transition">
-            Podívat se na realizace
-          </a> -->
-      </div>
-
-          <!-- Důvěry 
-          <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-gray-800 text-sm">
-            <span class="inline-flex items-center gap-2">
-              <span class="h-1.5 w-1.5 rounded-full bg-emerald-500/90"></span> 100+ realizací
-            </span>
-            <span class="inline-flex items-center gap-2">
-              <span class="h-1.5 w-1.5 rounded-full bg-emerald-500/90"></span> Precizní a čistá práce
-            </span>
-            <span class="inline-flex items-center gap-2">
-              <span class="h-1.5 w-1.5 rounded-full bg-emerald-500/90"></span> Termíny a jasná komunikace
-            </span>
-          </div>-->
-        </div>
-
       </div>
     </div>
   </div>
 </section>
-<!-- Pruh s benefity -->
-<section class="bg-sky-50 py-10">
-  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-6 text-center">
-    
-    <!-- Box 1 -->
-    <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
-      <h3 class="text-2xl font-bold text-sky-800">100+ realizací</h3>
-      <p class="mt-2 text-gray-600 text-sm">Ověřená kvalita a zkušenosti</p>
-    </div>
 
-    <!-- Box 2 -->
-    <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
-      <h3 class="text-2xl font-bold text-sky-800">Precizní a čistá práce</h3>
-      <p class="mt-2 text-gray-600 text-sm">Každý detail má své místo</p>
-    </div>
 
-    <!-- Box 3 -->
-    <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
-      <h3 class="text-2xl font-bold text-sky-800">Dodržení termínů</h3>
-      <p class="mt-2 text-gray-600 text-sm">Časový plán vždy respektuji</p>
-    </div>
+<!-- ================= MOBILE/TABLET HERO ================= -->
+<section class="relative overflow-hidden min-h-[88vh] flex items-center justify-center block lg:hidden px-4">
+  <!-- Obrázek pro mobily/tablety – zdůrazní podhled -->
+  <img src="{% static 'images/uvodnimob2.jpg' %}" alt="Sádrokartonářské práce"
+       class="absolute inset-0 -z-10 w-full h-full object-cover object-top">
 
-  </div>
-</section>
-    
-    <!-- Levý prázdný prostor nebo později doplněná fotka -->
-    <div></div>
-    
+  <!-- Gradient odspodu 
+  <div class="absolute inset-x-0 bottom-0 h-2/3 -z-10 bg-gradient-to-t from-white/95 via-white/50 to-transparent"></div>-->
 
-    
-  </div>
-<section id="about" class="py-10 bg-white scroll-mt-24">
-  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-8 items-center">
-    
-    <!-- Levý blok s fotkou -->
-    <div id="aboutImage" class="flex justify-center transform opacity-0 -translate-x-20 transition-all duration-[2000ms] ease-out">
-      <img src="{% static 'images/omne.jpg' %}" 
-           alt="Martin Vodička" 
-           class="w-72 h-auto rounded-lg shadow-lg object-cover">
-    </div>
-    
-    <!-- Pravý blok s textem -->
-    <div id="aboutText" class="relative bg-white py-5 px-8 shadow-lg rounded-lg overflow-hidden transform opacity-0 translate-x-20 transition-all duration-[2000ms] ease-out">
-      <!-- Barevný pruh vlevo -->
-      <div class="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-sky-800 to-sky-500"></div>
+  <!-- Obsah -->
+  <div class="relative z-10 w-full mt-12 max-w-md">
+    <div class="bg-white/85 backdrop-blur-sm rounded-xl p-5 sm:p-6 shadow-lg ring-1 ring-white/50 text-center">
       
-      <h2 class="text-3xl font-bold mb-4 text-gray-800">O mně</h2>
-      <p class="text-base text-gray-700 leading-relaxed mb-3">
-        Jmenuji se Martin Vodička a práci se sádrokartonem se věnuji již řadu let. 
-        Začínal jsem u menších projektů, postupně jsem získal zkušenosti i na rozsáhlých komerčních stavbách 
-        a několik let jsem působil také v Londýně.
-      </p>
-      <p class="text-base text-gray-700 leading-relaxed">
-        Práci odvádím osobně a používám kvalitní materiály značky Rigips, která zaručuje dlouhou životnost konstrukcí. 
-        Díky znalosti angličtiny spolupracuji i se zahraničními klienty v ČR.
-      </p>
-    </div>
+      <!-- Předtitulek -->
+      <div class="inline-flex items-center gap-2 mt-5 mb-4 px-3 py-1 rounded-lg
+                  text-xs font-semibold text-sky-900 bg-sky-200/90 ring-1 ring-sky-300/70">
+        • Sádrokartonář pro Středočeský kraj
+      </div>
 
+      <!-- Nadpis -->
+      <h1 class="font-extrabold tracking-tight text-2xl sm:text-3xl text-gray-900 leading-snug">
+        <span class="block">Sádrokartonářské práce</span>
+        <span class="block">pro váš domov</span>
+      </h1>
+
+      <!-- Podnadpis -->
+      <p class="mt-3 text-sm sm:text-base text-gray-700 leading-relaxed .no-justify">
+        Když chcete jistotu,
+        <span class="block">že to bude udělané pořádně.</span>
+      </p>
+
+      <!-- CTA -->
+      <div class="mt-5 flex flex-col gap-3">
+        <a href="#kontakt"
+           class="w-full inline-flex items-center justify-center px-6 py-3 rounded-lg text-base font-semibold text-white
+                  bg-sky-700 hover:bg-sky-800 focus:outline-none focus:ring-4 focus:ring-sky-300
+                  transition duration-200 shadow-md active:scale-[0.99]">
+          Poptat realizaci
+        </a>
+        <a href="#realizace"
+           class="w-full inline-flex items-center justify-center px-6 py-3 rounded-lg text-base font-semibold text-sky-800
+                  bg-white/95 hover:bg-white focus:outline-none focus:ring-4 focus:ring-sky-200
+                  ring-1 ring-sky-100 transition duration-200">
+          ukázka realizací →
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!--Sekce o mne-->
+  </div>
+<section id="about" class="py-20 bg-white scroll-mt-24">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="grid grid-cols-12 gap-8 lg:gap-12 items-start">
+      
+      <!-- FOTO (menší, decentní) -->
+      <div id="aboutImage" class="col-span-12 md:col-span-4 flex justify-center opacity-0 -translate-y-3 transition-all duration-700 ease-out">
+        <img
+          src="{% static 'images/omne.jpg' %}"
+          alt="Martin Vodička"
+          loading="lazy"
+          class="w-56 sm:w-64 md:w-72 h-auto object-cover rounded-lg"
+        />
+      </div>
+
+      <!-- TEXT -->
+      <div id="aboutText" class="col-span-12 md:col-span-8 opacity-0 translate-y-3 transition-all duration-700 ease-out">
+        <div class="relative">
+          <!-- Outline monogram -->
+          <svg aria-hidden="true" class="pointer-events-none absolute -top-8 -left-2 h-[100px] w-auto text-gray-200 select-none">
+            <text x="0" y="75" font-size="95" font-weight="800" fill="none" stroke="currentColor" stroke-width="1.5" letter-spacing="-2">MV</text>
+          </svg>
+
+          <h2 class="relative text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.05] text-gray-900">
+            O&nbsp;mně
+          </h2>
+        </div>
+
+        <div class="mt-6 h-px w-24 bg-gray-900"></div>
+
+        <!-- KRÁTKÝ ÚVOD (vždy viditelný) -->
+        <p class="mt-6 text-[1.15rem] leading-8 text-gray-800 text-justify">
+          Jmenuji se <span class="font-semibold">Martin Vodička</span> a specializuji se na práci se sádrokartonem. 
+          Základy řemesla jsem získal už během studia v oboru suché stavby, které mi dalo pevný technický základ. 
+          Kariéru jsem poté rozvíjel v&nbsp;Londýně na velkých komerčních stavbách, kde jsem se v prostředí s vysokými nároky na kvalitu, 
+          přesnost a dodržování termínů naučil sádrokarton ovládat na špičkové úrovni. Díky propojení teorie a praxe dokážu navrhnout řešení, 
+          které dává smysl po stránce konstrukční, funkční i estetické.“
+        </p>
+        
+        <!-- ROZBALOVACÍ ČÁST (zbytek textu) -->
+        <details class="group mt-4 text-[1.15rem] leading-8 text-gray-800 text-justify">
+          <summary class="flex cursor-pointer select-none items-center gap-3 py-2 text-base font-semibold text-gray-900">
+            <span class="underline decoration-2 underline-offset-[6px] decoration-sky-700 group-open:decoration-gray-900">
+              <span class="group-open:hidden">Zobrazit více</span>
+              <span class="hidden group-open:inline">Skrýt</span>
+            </span>
+            <svg class="h-4 w-4 transition-transform group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M10 12a1 1 0 0 1-.7-.29l-5-5a1 1 0 1 1 1.4-1.42L10 9.59l4.3-4.3a1 1 0 1 1 1.4 1.42l-5 5A1 1 0 0 1 10 12z" clip-rule="evenodd"/>
+            </svg>
+          </summary>
+
+          <div class="mt-2 space-y-5">
+            
+            <p>
+              Po několika letech v zahraničí jsem se vrátil zpět do Česka, kde své zkušenosti uplatňuji na rezidenčních i komerčních projektech.
+               Postupně jsem si vybudoval pověst spolehlivého řemeslníka, na kterého se
+              zákazníci mohou obrátit, když chtějí jistotu kvalitně odvedené práce. Nejsem firma s desítkami
+              zaměstnanců, proto víte, kdo u vás doma skutečně pracuje a kdo ručí za výsledek.
+            </p>
+            <p>
+              Používám kvalitní materiály značky Rigips, které zaručují dlouhou životnost, akustický komfort i estetický vzhled interiéru. 
+              Věřím, že o výsledku rozhodují detaily, a proto jim věnuji maximální péči. Díky znalosti angličtiny mohu spolupracovat i se 
+              zahraničními klienty žijícími v ČR. Moje práce není jen o montáži stěn a podhledů, ale především o důvěře, že projekt proběhne 
+              bez komplikací, včas a s výsledkem, na který se budete každý den rádi dívat.
+            </p>
+          </div>
+        </details>
+
+        <!-- CTA odkaz -->
+        <div class="mt-8">
+          <a href="#proc-prave-ja"
+             class="text-base font-semibold text-gray-900 underline decoration-2 underline-offset-[6px] decoration-sky-700 hover:decoration-gray-900">
+            Proč si vybrat právě mě →
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const observerOptions = { threshold: 0.2 };
-    
-    const reveal = (entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.remove("opacity-0", "-translate-x-20", "translate-x-20");
-          entry.target.classList.add("opacity-100", "translate-x-0");
-          observer.unobserve(entry.target);
-        }
-      });
+    const opts = { threshold: 0.2 };
+    const animate = (el, out, into) => {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          el.classList.remove(...out);
+          el.classList.add(...into);
+          io.unobserve(el);
+        });
+      }, opts);
+      io.observe(el);
     };
-    
-    const observer = new IntersectionObserver(reveal, observerOptions);
-    
-    const targets = [document.getElementById("aboutImage"), document.getElementById("aboutText")];
-    targets.forEach(el => observer.observe(el));
+
+    const img = document.getElementById("aboutImage");
+    const txt = document.getElementById("aboutText");
+    if (img) animate(img, ["opacity-0","-translate-y-3"], ["opacity-100","translate-y-0"]);
+    if (txt) animate(txt, ["opacity-0","translate-y-3"], ["opacity-100","translate-y-0"]);
   });
 </script>
-
-<section id="muj-pristup" class="bg-white py-5 mb-10">
-  <div class="max-w-6xl mx-auto px-6">
+<section id="sluzby" class="py-20 bg-gray-50 scroll-mt-24">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
     
-    <!-- Nadpis -->
-    <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Proč si vybrat právě mě</h2>
-    <p class="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto text-center mb-8">
-      Na své práci si dávám záležet a neustále se vzdělávám, abych držel krok s moderními technologiemi a postupy.
-      Mým cílem je, aby výsledek nejen splnil, ale i předčil vaše očekávání.
-    </p>
+    <!-- HLAVNÍ NADPIS -->
+    <h2 class="text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 mb-12 text-center">
+      Moje služby
+    </h2>
+   
 
-    <!-- Kolonky -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div class="bg-gray-50 p-4 rounded-lg shadow-sm text-center">
-        <span class="block font-semibold text-sky-700 text-lg mb-1">Osobní dohled</span>
-        <span class="text-sm text-gray-600">Provádím práci od začátku do konce osobně.</span>
+    <!-- GRID SLUŽEB -->
+    <div class="grid gap-10 md:grid-cols-3">
+      
+      <!-- 1. SLUŽBA -->
+      <div class="bg-white rounded-2xl p-8 shadow-md">
+        <h3 class="text-2xl font-bold text-gray-900">Montáž sádrokartonu</h3>
+        <p class="mt-4 text-gray-700">
+          Příčky a předstěny, podhledy, kazetové stropy, půdní vestavby a protipožární konstrukce.
+        </p>
+
+        <details class="group mt-4 text-gray-700">
+          <summary class="flex cursor-pointer select-none items-center gap-2 py-2 font-semibold text-gray-900">
+            <span class="underline decoration-2 underline-offset-[6px] decoration-sky-700 group-open:decoration-gray-900">
+              <span class="group-open:hidden">Zobrazit více</span>
+              <span class="hidden group-open:inline">Skrýt</span>
+            </span>
+            <svg class="h-4 w-4 transition-transform group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 12a1 1 0 0 1-.7-.29l-5-5a1 1 0 1 1 1.4-1.42L10 9.59l4.3-4.3a1 1 0 1 1 1.4 1.42l-5 5A1 1 0 0 1 10 12z" clip-rule="evenodd"/>
+            </svg>
+          </summary>
+          <div class="mt-2 space-y-3 text-justify">
+            <p>Realizuji moderní a nadčasová řešení, která dodají vašemu interiéru styl i funkčnost. Pomůžu s výběrem, doporučím kvalitní materiály a zajistím odbornou realizaci.</p>
+            <p>Sádrokarton není jen designovým prvkem – správná montáž zlepší akustiku, tepelnou izolaci a v klíčových částech zvýší i požární odolnost.</p>
+            <p>Součástí práce jsou také půdní vestavby, které promění nevyužité prostory v plnohodnotnou obytnou část domu.</p>
+            <p>Dbám na precizní provedení, aby výsledek působil čistě, rovně a dlouhodobě vydržel.</p>
+          </div>
+        </details>
       </div>
-      <div class="bg-gray-50 p-4 rounded-lg shadow-sm text-center">
-        <span class="block font-semibold text-sky-700 text-lg mb-1">Jasná komunikace</span>
-        <span class="text-sm text-gray-600">O všem budete vědět dopředu</span>
+
+      <!-- 2. SLUŽBA -->
+      <div class="bg-white rounded-2xl p-6 shadow-md">
+        <h3 class="text-2xl font-bold text-gray-900">Dokončovací práce</h3>
+        <p class="mt-4 text-gray-700">
+          Tmelení a broušení, malování bílou barvou a drobné zednické práce.
+        </p>
+
+        <details class="group mt-4 text-gray-700">
+          <summary class="flex cursor-pointer select-none items-center gap-2 py-2 font-semibold text-gray-900">
+            <span class="underline decoration-2 underline-offset-[6px] decoration-sky-700 group-open:decoration-gray-900">
+              <span class="group-open:hidden">Zobrazit více</span>
+              <span class="hidden group-open:inline">Skrýt</span>
+            </span>
+            <svg class="h-4 w-4 transition-transform group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 12a1 1 0 0 1-.7-.29l-5-5a1 1 0 1 1 1.4-1.42L10 9.59l4.3-4.3a1 1 0 1 1 1.4 1.42l-5 5A1 1 0 0 1 10 12z" clip-rule="evenodd"/>
+            </svg>
+          </summary>
+          <div class="mt-2 space-y-3 text-justify">
+            <p>Pečlivé dokončovací práce jsou klíčem k výsledku, který působí čistě a jednotně. Každý spoj tmelím a brousím tak, aby povrch byl dokonale hladký.</p>
+            <p>Nejčastější volbou je malování bílou barvou, která prostor prosvětlí a zvýrazní čistotu konstrukcí.</p>
+            <p>Součástí dokončovacích prací jsou také drobné zednické opravy – například zapravení menších děr nebo nerovností.</p>
+          </div>
+        </details>
       </div>
-      <div class="bg-gray-50 p-4 rounded-lg shadow-sm text-center">
-        <span class="block font-semibold text-sky-700 text-lg mb-1">Flexibilita</span>
-        <span class="text-sm text-gray-600">Přizpůsobím se vašemu provozu</span>
+
+      <!-- 3. SLUŽBA -->
+      <div class="bg-white rounded-2xl p-8 shadow-md">
+        <h3 class="text-2xl font-bold text-gray-900">Opravy</h3>
+        <p class="mt-4 text-gray-700">
+          Opravy prasklin, děr a poškození stěn i podhledů.
+        </p>
+
+        <details class="group mt-4 text-gray-700">
+          <summary class="flex cursor-pointer select-none items-center gap-2 py-2 font-semibold text-gray-900">
+            <span class="underline decoration-2 underline-offset-[6px] decoration-sky-700 group-open:decoration-gray-900">
+              <span class="group-open:hidden">Zobrazit více</span>
+              <span class="hidden group-open:inline">Skrýt</span>
+            </span>
+            <svg class="h-4 w-4 transition-transform group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 12a1 1 0 0 1-.7-.29l-5-5a1 1 0 1 1 1.4-1.42L10 9.59l4.3-4.3a1 1 0 1 1 1.4 1.42l-5 5A1 1 0 0 1 10 12z" clip-rule="evenodd"/>
+            </svg>
+          </summary>
+          <div class="mt-2 space-y-3 text-justify">
+            <p>Postarám se o pečlivé opravy, aby vaše stěny a podhledy znovu vypadaly jako nové.</p>
+            <p>Opravuji uražené rohy, otvory po světlech, řeším podhledy po vytopení a instaluji revizní dvířka.</p>
+            <p>Díky preciznímu provedení bude výsledek působit čistě a nenápadně – jako by k poškození nikdy nedošlo.</p>
+          </div>
+        </details>
       </div>
-      <div class="bg-gray-50 p-4 rounded-lg shadow-sm text-center">
-        <span class="block font-semibold text-sky-700 text-lg mb-1">Čistota po práci</span>
-        <span class="text-sm text-gray-600">Po sobě vždy uklidím</span>
-      </div>
+
     </div>
-
   </div>
 </section>
-<!-- Služby -->
-<section id="sluzby" class="py-10 bg-gray-50 scroll-mt-24">
-  <div class="max-w-6xl mx-auto px-6">
-    <h2 class="text-3xl font-bold text-center mb-12">Moje služby</h2>
-    
-    <!-- Grid s kartami -->
-    <div class="grid md:grid-cols-3 gap-10">
+
+{% load static %}
+<!-- Proč si vybrat právě mě?-->
+<section id="procja" class="relative py-20 bg-white">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
       
-      <div class="bg-white shadow-md rounded-lg p-6 text-center">
-        <img src="{% static 'images/sluzby1.jpg' %}" 
-             class="w-full h-[200px] object-cover mb-4 rounded" 
-             alt="Montáž sádrokartonu">
-        <h3 class="text-xl font-semibold mb-1">Montáž sádrokartonu</h3>
-        <p class="text-lg">Příčky a předstěny</p>
-        <p class="text-sm text-gray-500">Kvalita, která obstojí v čase</p>
-      </div>
+      <!-- Levý sloupec: obrázek s nadpisem vlevo -->
+      <div class="lg:col-span-5">
+        <div class="relative lg:sticky lg:top-24">
+          <div class="relative">
+            <img src="{% static 'images/Procja1.jpg' %}" 
+                 alt="Proč si vybrat právě mě"
+                 class="w-full h-[650px] object-cover rounded-xl shadow-sm">
+            
       
-      <div class="bg-white shadow-md rounded-lg p-6 text-center">
-        <img src="{% static 'images/sluzby2.jpg' %}" 
-             class="w-full h-[200px] object-cover mb-4 rounded" 
-             alt="Izolace">
-        <h3 class="text-xl font-semibold mb-1">Podhledy a kazetové stropy</h3>
-        <p class="text-lg">Rovné, šikmé a mezi trámy</p>
-        <p class="text-sm text-gray-500">Vzhled, který si zamilujete</p>
-      </div>
-      
-      <div class="bg-white shadow-md rounded-lg p-6 text-center">
-        <img src="{% static 'images/sluzby3.jpg' %}" 
-             class="w-full h-[200px] object-cover mb-4 rounded" 
-             alt="Interiérové práce">
-        <h3 class="text-xl font-semibold mb-1">Dokončovací práce</h3>
-        <p class="text-lg">Tmelení a broušení</p>
-        <p class="text-sm text-gray-500">Detaily, které dělají rozdíl</p>
+            <!-- Přechodový overlay (zleva doprava) -->
+            <div class="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-white/95 rounded-xl"></div>
+
+            <!-- Nadpis dole vlevo -->
+            <div class="absolute bottom-0 left-0 p-6">
+              <h2 class="text-4xl md:text-5xl font-bold text-white">
+                Proč si vybrat právě mě
+              </h2>
+            </div>
+          </div>
+        </div>
       </div>
 
+      <!-- Pravý obsah -->
+      <div class="lg:col-span-7 relative">
+        <ol class="divide-y divide-neutral-300">
+          <li class="group py-8 first:pt-0 last:pb-0">
+            <h3 class="text-xl font-semibold text-neutral-900">Zkušenosti</h3>
+            <p class="mt-2 text-neutral-700 text-justify">
+              Vím, co funguje. Více než 100 úspěšně dokončených projektů je důkazem, 
+              že dokážu zvolit správný postup i materiály a dodat výsledek, který vás potěší každý den.
+            </p>
+          </li>
+          <li class="group py-8">
+            <h3 class="text-xl font-semibold text-neutral-900">Kvalita</h3>
+            <p class="mt-2 text-neutral-700 text-justify">
+              Záleží mi na tom, aby váš interiér působil dokonale. 
+              Věřím, že právě detaily dělají z dobré práce skvělou,
+              a proto jim věnuji maximální pozornost. 
+              Mým cílem je, aby výsledek nejen splnil, ale i předčil vaše očekávání.
+            </p>
+          </li>
+          <li class="group py-8">
+            <h3 class="text-xl font-semibold text-neutral-900">Osobní přístup</h3>
+            <p class="mt-2 text-neutral-700 text-justify">
+              Každou zakázku realizuji od začátku do konce osobně. 
+              Vždy víte, kdo vytváří váš interiér, a máte jistotu, 
+              že se mu věnuje odborník, který se specializuje výhradně na sádrokartony. 
+              Vaše spokojenost je pro mě na prvním místě. 
+            </p>
+          </li>
+          <li class="group py-8">
+            <h3 class="text-xl font-semibold text-neutral-900">Odbornost</h3>
+            <p class="mt-2 text-neutral-700 text-justify">
+              Řemeslo se vyvíjí a já s ním. Neustálým vzděláváním a sledováním nových technologií
+              zajišťuji, že vám vždy nabídnu ideální postupy, špičkové materiály i prvky, 
+              které podtrhnou výsledný design.
+            </p>
+          </li>
+          
+          <li class="group py-8">
+            <h3 class="text-xl font-semibold text-neutral-900">Dodržení termínů</h3>
+            <p class="mt-2 text-neutral-700 text-justify">
+              Každá zakázka má svůj harmonogram a já se ho držím. 
+              Díky dobré organizaci práce zvládám realizace efektivně, 
+              aniž bych slevil z kvality provedení. 
+              Výsledkem je realizace, která je hotová včas a bez kompromisů na kvalitě.
+            </p>
+          </li>
+          <li class="group py-8">
+            <h3 class="text-xl font-semibold text-neutral-900">Čistota</h3>
+            <p class="mt-2 text-neutral-700 text-justify">
+              Po dokončení práce vždy předávám prostor uklizený a připravený k okamžitému použití. 
+              Nemusíte řešit nepořádek ani zbytky materiálu – zůstane po mně jen kvalitně odvedená práce.
+            </p>
+          </li>
+        </ol>
+      </div>
     </div>
-
+  </div>
+</section>
 <!-- ======================= REALIZACE ======================= -->
-<section id="realizace" class="py-14 bg-gray-50 scroll-mt-24">
+<section id="realizace" class="py-12 bg-gray-50 scroll-mt-24">
   <div class="max-w-6xl mx-auto px-6">
-    <h2 class="text-3xl font-bold text-center mb-10">Moje realizace</h2>
+    <h2 class="text-3xl font-bold text-center mb-8">Moje realizace</h2>
 
-    <div class="space-y-6">
+    <div class="space-y-4"><!-- menší svislé mezery -->
 
-      <!-- Zakázka 1 -->
+      <!-- Zakázka 1: Koupelna (Písek) -->
       <article class="bg-white rounded-xl shadow-md overflow-hidden">
-        <button class="w-full flex items-center justify-between p-5 text-left group" data-acc="toggle">
+        <button aria-expanded="false" class="w-full flex items-center justify-between p-4 text-left group" data-acc="toggle">
           <div>
-            <h3 class="text-xl font-semibold">Koupelna</h3>
-            <!--<p class="text-gray-600 text-sm">SDK podhled v obýváku, příčky 75&nbsp;mm, tmelení Q2</p>-->
+            <h3 class="text-lg font-semibold">Koupelna (Písek)</h3>
+            <p class="text-gray-600 text-sm">Realizace podhledu v koupelně s přiznanou spárou a rampami pro LED světlo</p>
           </div>
           <span class="ml-4 inline-block transition-transform group-aria-expanded:rotate-180">
-            <!-- šipka -->
-            <svg class="w-6 h-6 text-gray-500" viewBox="0 0 24 24" fill="none">
-              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
         </button>
-
-        <div class="px-5 pb-6 hidden" data-acc="panel">
-          <!-- Nahraj fotky do: static/images/realizace/zakazka-01/01.jpg ... -->
-          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <a href="{% static 'images/realizace/koupelna1.jpg' %}" class="rlz-photo" data-gallery="zak01">
-              <img src="{% static 'images/realizace/koupelna1.jpg' %}" loading="lazy" alt="Zakázka 1 – foto 1" class="w-full h-56 object-cover rounded-lg shadow-sm">
-            </a>
-            <a href="{% static 'images/realizace/koupelna2.jpg' %}" class="rlz-photo" data-gallery="zak01">
-              <img src="{% static 'images/realizace/koupelna2.jpg' %}" loading="lazy" alt="Zakázka 1 – foto 2" class="w-full h-56 object-cover rounded-lg shadow-sm">
-            </a>
-            <a href="{% static 'images/realizace/koupelna3.jpg' %}" class="rlz-photo" data-gallery="zak01">
-              <img src="{% static 'images/realizace/koupelna3.jpg' %}" loading="lazy" alt="Zakázka 1 – foto 3" class="w-full h-56 object-cover rounded-lg shadow-sm">
-            </a>
+        <div class="px-4 pb-4 hidden" data-acc="panel">
+          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+            <a href="{% static 'images/realizace/koupelna1.jpg' %}" class="rlz-photo" data-gallery="zak01"><img src="{% static 'images/realizace/koupelna1.jpg' %}" loading="lazy" alt="Koupelna Písek – foto 1" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/koupelna2.jpg' %}" class="rlz-photo" data-gallery="zak01"><img src="{% static 'images/realizace/koupelna2.jpg' %}" loading="lazy" alt="Koupelna Písek – foto 2" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/koupelna3.jpg' %}" class="rlz-photo" data-gallery="zak01"><img src="{% static 'images/realizace/koupelna3.jpg' %}" loading="lazy" alt="Koupelna Písek – foto 3" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/koupelna4.jpg' %}" class="rlz-photo" data-gallery="zak01"><img src="{% static 'images/realizace/koupelna4.jpg' %}" loading="lazy" alt="Koupelna Písek – foto 4" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
           </div>
         </div>
       </article>
 
-      <!-- Zakázka 2 -->
+      <!-- Zakázka 2: Kanceláře (Brno) -->
       <article class="bg-white rounded-xl shadow-md overflow-hidden">
-        <button class="w-full flex items-center justify-between p-5 text-left group" data-acc="toggle">
+        <button aria-expanded="false" class="w-full flex items-center justify-between p-4 text-left group" data-acc="toggle">
           <div>
-            <h3 class="text-xl font-semibold">Kanceláře</h3>
-            <!--<p class="text-gray-600 text-sm">Předstěny CW 50, minerální izolace 50&nbsp;mm, desky RBI</p>-->
+            <h3 class="text-lg font-semibold">Kanceláře (Brno)</h3>
+            <p class="text-gray-600 text-sm">Realizace akustických stěn a kazetových podhledů v kancelářích</p>
           </div>
           <span class="ml-4 inline-block transition-transform group-aria-expanded:rotate-180">
-            <svg class="w-6 h-6 text-gray-500" viewBox="0 0 24 24" fill="none">
-              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
         </button>
-
-        <div class="px-5 pb-6 hidden" data-acc="panel">
-          <!-- Nahraj fotky do: static/images/realizace/zakazka-02/01.jpg ... -->
-          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <a href="{% static 'images/realizace/kancelar1.jpg' %}" class="rlz-photo" data-gallery="zak02">
-              <img src="{% static 'images/realizace/kancelar1.jpg' %}" loading="lazy" alt="Zakázka 2 – foto 1" class="w-full h-56 object-cover rounded-lg shadow-sm">
-            </a>
-            <a href="{% static 'images/realizace/kancelar2.jpg' %}" class="rlz-photo" data-gallery="zak02">
-              <img src="{% static 'images/realizace/kancelar2.jpg' %}" loading="lazy" alt="Zakázka 2 – foto 2" class="w-full h-56 object-cover rounded-lg shadow-sm">
-            </a>
-            <a href="{% static 'images/realizace/kancelar3.jpg' %}" class="rlz-photo" data-gallery="zak02">
-              <img src="{% static 'images/realizace/kancelar3.jpg' %}" loading="lazy" alt="Zakázka 2 – foto 3" class="w-full h-56 object-cover rounded-lg shadow-sm">
-            </a>
+        <div class="px-4 pb-4 hidden" data-acc="panel">
+          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+            <a href="{% static 'images/realizace/kancelar1.jpg' %}" class="rlz-photo" data-gallery="zak02"><img src="{% static 'images/realizace/kancelar1.jpg' %}" loading="lazy" alt="Kanceláře Brno – foto 1" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/kancelar2.jpg' %}" class="rlz-photo" data-gallery="zak02"><img src="{% static 'images/realizace/kancelar2.jpg' %}" loading="lazy" alt="Kanceláře Brno – foto 2" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/kancelar3.jpg' %}" class="rlz-photo" data-gallery="zak02"><img src="{% static 'images/realizace/kancelar3.jpg' %}" loading="lazy" alt="Kanceláře Brno – foto 3" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/kancelar4.jpg' %}" class="rlz-photo" data-gallery="zak02"><img src="{% static 'images/realizace/kancelar4.jpg' %}" loading="lazy" alt="Kanceláře Brno – foto 4" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/kancelar5.jpg' %}" class="rlz-photo" data-gallery="zak02"><img src="{% static 'images/realizace/kancelar5.jpg' %}" loading="lazy" alt="Kanceláře Brno – foto 5" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/kancelar6.jpg' %}" class="rlz-photo" data-gallery="zak02"><img src="{% static 'images/realizace/kancelar6.jpg' %}" loading="lazy" alt="Kanceláře Brno – foto 6" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/kancelar7.jpg' %}" class="rlz-photo" data-gallery="zak02"><img src="{% static 'images/realizace/kancelar7.jpg' %}" loading="lazy" alt="Kanceláře Brno – foto 7" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
           </div>
         </div>
       </article>
 
-      <!-- Zakázka 3 (ukázka další) -->
+      <!-- Zakázka 3: Kanceláře (Uherčice) 
       <article class="bg-white rounded-xl shadow-md overflow-hidden">
-        <button class="w-full flex items-center justify-between p-5 text-left group" data-acc="toggle">
+        <button aria-expanded="false" class="w-full flex items-center justify-between p-4 text-left group" data-acc="toggle">
           <div>
-            <h3 class="text-xl font-semibold">Protipožární konstrukce</h3>
-            <!--<p class="text-gray-600 text-sm">Minerální kazety 600×600, přestavba osvětlení</p>-->
+            <h3 class="text-lg font-semibold">Kanceláře (Uherčice)</h3>
+            <p class="text-gray-600 text-sm">Realizace příček a předstěn v kancelářích</p>
           </div>
           <span class="ml-4 inline-block transition-transform group-aria-expanded:rotate-180">
-            <svg class="w-6 h-6 text-gray-500" viewBox="0 0 24 24" fill="none">
-              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
         </button>
+        <div class="px-4 pb-4 hidden" data-acc="panel">
+          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+            <a href="{% static 'images/realizace/uhercice1.jpg' %}" class="rlz-photo" data-gallery="zak03"><img src="{% static 'images/realizace/uhercice1.jpg' %}" loading="lazy" alt="Kanceláře Uherčice – foto 1" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/uhercice2.jpg' %}" class="rlz-photo" data-gallery="zak03"><img src="{% static 'images/realizace/uhercice2.jpg' %}" loading="lazy" alt="Kanceláře Uherčice – foto 2" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/uhercice3.jpg' %}" class="rlz-photo" data-gallery="zak03"><img src="{% static 'images/realizace/uhercice3.jpg' %}" loading="lazy" alt="Kanceláře Uherčice – foto 3" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/uhercice4.jpg' %}" class="rlz-photo" data-gallery="zak03"><img src="{% static 'images/realizace/uhercice4.jpg' %}" loading="lazy" alt="Kanceláře Uherčice – foto 4" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/uhercice5.jpg' %}" class="rlz-photo" data-gallery="zak03"><img src="{% static 'images/realizace/uhercice5.jpg' %}" loading="lazy" alt="Kanceláře Uherčice – foto 5" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+          </div>
+        </div>
+      </article>-->
 
-        <div class="px-5 pb-6 hidden" data-acc="panel">
-          <!-- Nahraj fotky do: static/images/realizace/zakazka-03/01.jpg ... -->
-          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <a href="{% static 'images/realizace/protipozar1.jpg' %}" class="rlz-photo" data-gallery="zak03">
-              <img src="{% static 'images/realizace/protipozar1.jpg' %}" loading="lazy" alt="Zakázka 3 – foto 1" class="w-full h-56 object-cover rounded-lg shadow-sm">
-            </a>
-            <a href="{% static 'images/realizace/protipozar2.jpg' %}" class="rlz-photo" data-gallery="zak03">
-              <img src="{% static 'images/realizace/protipozar2.jpg' %}" loading="lazy" alt="Zakázka 3 – foto 2" class="w-full h-56 object-cover rounded-lg shadow-sm">
-            </a>
-            <a href="{% static 'images/realizace/protipozar3.jpg' %}" class="rlz-photo" data-gallery="zak03">
-              <img src="{% static 'images/realizace/protipozar3.jpg' %}" loading="lazy" alt="Zakázka 3 – foto 3" class="w-full h-56 object-cover rounded-lg shadow-sm">
+      <!-- Zakázka 4: Protipožární konstrukce (Ostrovec) -->
+      <article class="bg-white rounded-xl shadow-md overflow-hidden">
+        <button aria-expanded="false" class="w-full flex items-center justify-between p-4 text-left group" data-acc="toggle">
+          <div>
+            <h3 class="text-lg font-semibold">Protipožární konstrukce (Ostrovec)</h3>
+            <p class="text-gray-600 text-sm">Realizace protipožární předstěny a podhledů</p>
+          </div>
+          <span class="ml-4 inline-block transition-transform group-aria-expanded:rotate-180">
+            <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </button>
+        <div class="px-4 pb-4 hidden" data-acc="panel">
+          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+            <a href="{% static 'images/realizace/protipozar1.jpg' %}" class="rlz-photo" data-gallery="zak04"><img src="{% static 'images/realizace/protipozar1.jpg' %}" loading="lazy" alt="Protipožární konstrukce – foto 1" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/protipozar2.jpg' %}" class="rlz-photo" data-gallery="zak04"><img src="{% static 'images/realizace/protipozar2.jpg' %}" loading="lazy" alt="Protipožární konstrukce – foto 2" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/protipozar3.jpg' %}" class="rlz-photo" data-gallery="zak04"><img src="{% static 'images/realizace/protipozar3.jpg' %}" loading="lazy" alt="Protipožární konstrukce – foto 3" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/protipozar4.jpg' %}" class="rlz-photo" data-gallery="zak04"><img src="{% static 'images/realizace/protipozar4.jpg' %}" loading="lazy" alt="Protipožární konstrukce – foto 4" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/protipozar5.jpg' %}" class="rlz-photo" data-gallery="zak04"><img src="{% static 'images/realizace/protipozar5.jpg' %}" loading="lazy" alt="Protipožární konstrukce – foto 5" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/protipozar6.jpg' %}" class="rlz-photo" data-gallery="zak04"><img src="{% static 'images/realizace/protipozar6.jpg' %}" loading="lazy" alt="Protipožární konstrukce – foto 6" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Zakázka 5: Dřevostavba (Zátaví) -->
+      <article class="bg-white rounded-xl shadow-md overflow-hidden">
+        <button aria-expanded="false" class="w-full flex items-center justify-between p-4 text-left group" data-acc="toggle">
+          <div>
+            <h3 class="text-lg font-semibold">Dřevostavba (Zátaví)</h3>
+            <p class="text-gray-600 text-sm">Realizace zaklápění na dřevěnou podkonstrukci</p>
+          </div>
+          <span class="ml-4 inline-block transition-transform group-aria-expanded:rotate-180">
+            <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </button>
+        <div class="px-4 pb-4 hidden" data-acc="panel">
+          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+            <a href="{% static 'images/realizace/drevostavba1.jpg' %}" class="rlz-photo" data-gallery="zak05"><img src="{% static 'images/realizace/drevostavba1.jpg' %}" loading="lazy" alt="Dřevostavba Zátaví – foto 1" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/drevostavba2.jpg' %}" class="rlz-photo" data-gallery="zak05"><img src="{% static 'images/realizace/drevostavba2.jpg' %}" loading="lazy" alt="Dřevostavba Zátaví – foto 2" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/drevostavba3.jpg' %}" class="rlz-photo" data-gallery="zak05"><img src="{% static 'images/realizace/drevostavba3.jpg' %}" loading="lazy" alt="Dřevostavba Zátaví – foto 3" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/drevostavba4.jpg' %}" class="rlz-photo" data-gallery="zak05"><img src="{% static 'images/realizace/drevostavba4.jpg' %}" loading="lazy" alt="Dřevostavba Zátaví – foto 4" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/drevostavba5.jpg' %}" class="rlz-photo" data-gallery="zak05"><img src="{% static 'images/realizace/drevostavba5.jpg' %}" loading="lazy" alt="Dřevostavba Zátaví – foto 5" class="w-full h-40 object-cover rounded-lg shadow-sm"></a>
+            <a href="{% static 'images/realizace/drevostavba6.jpg' %}" class="rlz-photo" data-gallery="zak05"><!-- sjednocení gal. id -->
+              <img src="{% static 'images/realizace/drevostavba6.jpg' %}" loading="lazy" alt="Dřevostavba Zátaví – foto 6" class="w-full h-40 object-cover rounded-lg shadow-sm">
             </a>
           </div>
         </div>
       </article>
 
     </div>
+
+    <!-- CTA -->
+    <div class="flex justify-center mt-8">
+      <a href="#kontakt" class="inline-flex items-center justify-center px-7 py-3 font-semibold text-white text-base bg-sky-700 hover:bg-sky-800 rounded-lg transition">
+        Mám zájem o spolupráci
+      </a>
+    </div>
+
   </div>
 </section>
 
-<!-- Lightbox (zvětšení fotky) -->
+<!-- Lightbox (zvětšení fotky) s navigací -->
 <div id="rlz-lightbox" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-[60]">
+  <button id="rlz-prev" class="absolute left-2 md:left-6 text-white/80 hover:text-white text-3xl px-3 py-2" aria-label="Předchozí">‹</button>
   <img id="rlz-lightbox-img" class="max-w-[92vw] max-h-[92vh] rounded-lg shadow-2xl" alt="Náhled realizace">
-  <button id="rlz-lightbox-close" class="absolute top-4 right-4 text-white text-3xl leading-none px-3">×</button>
+  <button id="rlz-next" class="absolute right-2 md:right-6 text-white/80 hover:text-white text-3xl px-3 py-2" aria-label="Další">›</button>
+  <button id="rlz-lightbox-close" class="absolute top-3 right-3 text-white/80 hover:text-white text-3xl leading-none px-3" aria-label="Zavřít">×</button>
 </div>
 
 <!-- Akordeon + Lightbox skript -->
 <script>
-  // Akordeon
+  // ===== Akordeon (single-open) =====
   document.querySelectorAll('[data-acc="toggle"]').forEach(btn => {
+    const article = btn.closest('article');
+    const panel = article.querySelector('[data-acc="panel"]');
     btn.addEventListener('click', () => {
-      const panel = btn.parentElement.querySelector('[data-acc="panel"]');
       const isHidden = panel.classList.contains('hidden');
-      // zavři ostatní
       document.querySelectorAll('[data-acc="panel"]').forEach(p => p.classList.add('hidden'));
-      // otevři aktuální
-      if (isHidden) panel.classList.remove('hidden');
+      document.querySelectorAll('[data-acc="toggle"]').forEach(b => b.setAttribute('aria-expanded', 'false'));
+      if (isHidden) { panel.classList.remove('hidden'); btn.setAttribute('aria-expanded', 'true'); }
     });
   });
 
-  // Lightbox
+  // ===== Lightbox s navigací v rámci galerie =====
   const lb = document.getElementById('rlz-lightbox');
   const lbImg = document.getElementById('rlz-lightbox-img');
   const lbClose = document.getElementById('rlz-lightbox-close');
+  const lbPrev = document.getElementById('rlz-prev');
+  const lbNext = document.getElementById('rlz-next');
 
+  // Uložíme seznamy fotek podle data-gallery
+  const galleries = {};
   document.querySelectorAll('.rlz-photo').forEach(a => {
-    a.addEventListener('click', (e) => {
-      e.preventDefault();
-      lbImg.src = a.getAttribute('href');
-      lb.classList.remove('hidden');
-      lb.classList.add('flex');
-    });
+    const g = a.getAttribute('data-gallery') || 'default';
+    if (!galleries[g]) galleries[g] = [];
+    galleries[g].push(a.getAttribute('href'));
   });
+
+  let currentGallery = null;
+  let currentIndex = 0;
+
+  function openLb(gallery, index) {
+    currentGallery = gallery;
+    currentIndex = index;
+    lbImg.src = galleries[gallery][index];
+    lb.classList.remove('hidden');
+    lb.classList.add('flex');
+  }
 
   function closeLb() {
     lb.classList.add('hidden');
     lb.classList.remove('flex');
     lbImg.src = '';
+    currentGallery = null;
+    currentIndex = 0;
   }
+
+  function show(delta) {
+    if (!currentGallery) return;
+    const arr = galleries[currentGallery];
+    currentIndex = (currentIndex + delta + arr.length) % arr.length;
+    lbImg.src = arr[currentIndex];
+  }
+
+  // Kliknutí na náhled
+  document.querySelectorAll('.rlz-photo').forEach(a => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const gallery = a.getAttribute('data-gallery') || 'default';
+      const href = a.getAttribute('href');
+      const index = galleries[gallery].indexOf(href);
+      openLb(gallery, Math.max(0, index));
+    });
+  });
+
+  // Ovládání šipkami, klikem, kolečkem
+  lbPrev.addEventListener('click', () => show(-1));
+  lbNext.addEventListener('click', () => show(1));
+  lb.addEventListener('click', (e) => {
+    // klik na levou/pravou půlku (mimo obrázek i tlačítka) → navigace
+    const rect = lb.getBoundingClientRect();
+    const clickedOnImg = e.target === lbImg || e.target === lbPrev || e.target === lbNext || e.target === lbClose;
+    if (clickedOnImg) return;
+    const x = e.clientX - rect.left;
+    if (x < rect.width / 2) show(-1); else show(1);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (lb.classList.contains('hidden')) return;
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowLeft') show(-1);
+    if (e.key === 'ArrowRight') show(1);
+  });
+
+  lb.addEventListener('wheel', (e) => {
+    if (lb.classList.contains('hidden')) return;
+    if (e.deltaY > 0) show(1); else show(-1);
+  }, { passive: true });
+
   lbClose.addEventListener('click', closeLb);
-  lb.addEventListener('click', (e) => { if (e.target === lb) closeLb(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLb(); });
 </script>
-
-   <!-- Tlačítko pod kartami -->
-<div class="flex justify-center ">
-  <a href="#kontakt"
-     class="inline-flex items-center justify-center px-8 py-4 font-semibold text-white text-lg
-            bg-sky-700 hover:bg-sky-800  rounded-xl transition
-            "> 
-    Mám zájem o spolupráci
-  </a>
-</div>
-    
-  </div>
-</section>
-
 <!-- Kalkulačka
 <section id="kalkulacka" class="py-20 bg-white scroll-mt-24">  
   <div class="max-w-3xl mx-auto px-6 text-center">
@@ -660,11 +842,11 @@
         <!-- Kolečko s iniciálami -->
         <div class="w-16 h-16 aspect-square shrink-0 rounded-full bg-sky-700
                     text-white font-bold text-lg flex items-center justify-center shadow-md">
-          RH
+          PG
         </div>
         <div>
-          <p class="italic">„Kvalitně udělaný podhled, vše rovné, spáry nikde a uklizeno!“</p>
-          <p class="text-sm text-gray-500 mt-2">— Radim Husák, Brno</p>
+          <p class="italic">„Mladý kluk, ale vyzná se. Práci odvedl podle domluvy a&nbsp;v&nbsp;termínu.“</p>
+          <p class="text-sm text-gray-500 mt-2">— Patrik Gottwald, Brno</p>
         </div>
       </div>
 
@@ -673,74 +855,88 @@
         <!-- Kolečko s iniciálami -->
         <div class="w-16 h-16 aspect-square shrink-0 rounded-full bg-sky-700
                     text-white font-bold text-lg flex items-center justify-center shadow-md">
-          PH
+          RB
         </div>
         <div>
-          <p class="italic">„Skvělá domluva a precizní práce. Všechno hotové, jak jsme se dohodli.“</p>
-          <p class="text-sm text-gray-500 mt-2">— Petra Horová, Praha</p>
+          <p class="italic">„Skvělá domluva a čistá práce. Všechno hotové, jak jsme se dohodli.“</p>
+          <p class="text-sm text-gray-500 mt-2">— Roman Blažek, Strakonice</p>
         </div>
       </div>
 
     </div>
   </div>
 </section>
-<!-- Sekce kontakt – rozdělený formulář -->
-<section id="kontakt" class="py-16 bg-white">
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="grid md:grid-cols-2 gap-10 items-start">
-      
-      <!-- LEVÝ SLOUPEC: Text + kontakty -->
-      <div>
-        <h2 class="text-4xl font-bold mb-6">Máte zájem o spolupráci?</h2>
-        <p class="text-2xl text-gray-600 mb-8">
+<!-- ======================= KONTAKT ======================= -->
+<section id="kontakt" class="py-12 md:py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-3 md:gap-12 items-start">
+
+      <!-- LEVÁ STRANA -->
+      <div class="pb-6 text-center md:text-left">
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-2 md:mb-4">
+          Máte zájem o spolupráci?
+        </h2>
+
+        <!-- Podnadpisy -->
+        <p class="block md:hidden text-base sm:text-lg text-gray-600 mb-2 leading-relaxed">
           Napište mi a já se vám brzy ozvu s návrhem řešení.
         </p>
+       <p class="hidden md:block text-lg text-gray-600 mb-6 leading-relaxed">
+  Napište mi a já se vám brzy ozvu s návrhem řešení.
+</p>
+
+<!-- Modrý text: Nezávazná kalkulace zdarma -->
+<p class="text-sky-700 font-semibold mb-4 md:mb-6 no-justify text-center md:text-left">
+  Nezávazná kalkulace zdarma
+</p>
 
         <!-- Telefon -->
-        <div class="flex items-center text-2xl font-bold text-sky-700 mb-3">
+        <div class="flex justify-center md:justify-start items-center text-xl sm:text-2xl font-bold text-sky-700 mb-2 md:mb-4">
           <span class="mr-3">📞</span>
-          <a href="tel:+420776478807" class="hover:underline">+420&nbsp;776&nbsp;478&nbsp;807</a>
+          <a href="tel:+420776478807" class="hover:underline">
+            +420&nbsp;776&nbsp;478&nbsp;807
+          </a>
         </div>
 
         <!-- E-mail -->
-        <div class="flex items-center text-xl font-semibold text-gray-800">
+        <div class="flex justify-center md:justify-start items-center text-lg sm:text-xl font-semibold text-gray-800 mb-1 md:mb-4">
           <span class="mr-3">✉️</span>
-          <a href="mailto:info@sadrokartony-mv.cz" class="hover:underline">info@sadrokartony-mv.cz</a>
+          <a href="mailto:info@sadrokartony-mv.cz" class="hover:underline">
+            info@sadrokartony-mv.cz
+          </a>
         </div>
       </div>
 
-      <!-- PRAVÝ SLOUPEC: Formulář -->
-      <form class="space-y-4 bg-white border border-gray-500 rounded-xl p-6 shadow-sm">
-        <!-- 2 sloupce nahoře -->
-        <div class="grid md:grid-cols-2 gap-4">
-          <div>
+      <!-- PRAVÁ STRANA: FORMULÁŘ -->
+      <div>
+        <form class="bg-white p-6 md:p-10 rounded-2xl shadow-xl border border-gray-200 space-y-4 md:space-y-6">
+          <div class="grid sm:grid-cols-2 gap-4 md:gap-6">
             <input type="text" required placeholder="Jméno a příjmení *"
-                   class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sky-300 mb-4">
+                   class="w-full border border-gray-300 rounded-lg px-3 py-2.5 md:px-4 md:py-3 text-base md:text-lg focus:outline-none focus:ring-2 focus:ring-sky-400">
             <input type="tel" required placeholder="Telefonní číslo *"
-                   class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sky-300">
-          </div>
-          <div>
+                   class="w-full border border-gray-300 rounded-lg px-3 py-2.5 md:px-4 md:py-3 text-base md:text-lg focus:outline-none focus:ring-2 focus:ring-sky-400">
             <input type="email" placeholder="E-mail"
-                   class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sky-300 mb-4">
+                   class="w-full border border-gray-300 rounded-lg px-3 py-2.5 md:px-4 md:py-3 text-base md:text-lg focus:outline-none focus:ring-2 focus:ring-sky-400">
             <input type="text" placeholder="Lokalita realizace"
-                   class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sky-300">
+                   class="w-full border border-gray-300 rounded-lg px-3 py-2.5 md:px-4 md:py-3 text-base md:text-lg focus:outline-none focus:ring-2 focus:ring-sky-400">
           </div>
+
+          <textarea rows="5" placeholder="Popis zakázky"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2.5 md:px-4 md:py-3 text-base md:text-lg focus:outline-none focus:ring-2 focus:ring-sky-400"></textarea>
+
+          <button type="submit"
+                  class="w-full bg-sky-700 hover:bg-sky-800 text-white font-bold py-3 md:py-4 text-base md:text-lg rounded-lg transition shadow-md">
+            Odeslat poptávku
+          </button>
+        </form>
+
+        <!-- Info o DPH (mobil = střed, PC = vpravo) -->
+        <div class="text-gray-500 text-sm mt-4 text-center md:text-right">
+          <hr class="mb-3 border-gray-200">
+          Nejsem plátce DPH
         </div>
+      </div>
 
-        <!-- Textová zpráva -->
-        <textarea rows="4" placeholder="Popis zakázky"
-                  class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sky-300"></textarea>
-
-        <!-- Odeslat -->
-        <button type="submit"
-                class="w-full bg-sky-700 hover:bg-sky-800 text-white font-semibold py-3 rounded-lg transition">
-          Odeslat
-        </button>
-
-        <!--<p class="text-xs text-gray-500 text-center">
-          Odesláním souhlasíte se zpracováním údajů pro vyřízení poptávky.
-        </p>-->
-      </form>
     </div>
   </div>
 </section>
@@ -760,6 +956,37 @@
     menu.classList.toggle('hidden');
   });
 </script>
+...
+</section>
 
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // regex pro jednopísmenné spojky a předložky
+    const rx = /(\s|^)([KkSsVvZzOoUuIiAa])\s+/g; 
+    
+    // projede všechny <p> a <details> <p> v dokumentu
+    document.querySelectorAll("p, details p").forEach(el => {
+      el.innerHTML = el.innerHTML.replace(rx, (m, p1, p2) => `${p1}${p2}&nbsp;`);
+    });
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const onlyDesktop = window.matchMedia("(min-width: 768px)").matches;
+
+    document.querySelectorAll("p:not(.no-justify)").forEach(el => {
+      // Přidej justify jen na desktopu
+      if (onlyDesktop) el.classList.add("text-justify");
+    });
+
+    // Pevné mezery po jednopísmenných předložkách/spojkách – globálně
+    const rx = /(\s|^)([KkSsVvZzOoUuIiAa])\s+/g;
+    document.querySelectorAll("p, details p").forEach(el => {
+      el.innerHTML = el.innerHTML.replace(rx, (m, p1, p2) => `${p1}${p2}&nbsp;`);
+    });
+  });
+</script>
+</body>
+</html>
 </body>
 </html>
