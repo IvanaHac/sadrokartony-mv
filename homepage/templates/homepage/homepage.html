@@ -27,7 +27,7 @@
 </head>
 <body class="bg-white text-gray-800">
 
-<!-- Navigace -->
+<!-- ======================= NAVIGACE PC =======================-->
 <header class="bg-white text-black sticky top-0 z-50 shadow-md">
   <div class="max-w-7xl mx-auto px-2 py-3 flex justify-between items-center">
 
@@ -63,11 +63,6 @@
         Kontakt
       </a>
 
-      <!-- Kontakt napravo 
-      <div class="flex flex-col items-start pl-6 border-l border-gray-300 text-base leading-tight">
-        <span class="font-bold text-sky-700">📞 +420 776 478 807</span>
-        <span class="text-gray-600">✉️ info@sadrokartony-mv.cz</span>
-      </div>-->
     </nav>
 
   </div>
@@ -75,7 +70,9 @@
 
 </header>
 
-<!-- Horní lišta pro mobily -->
+
+<!-- ======================= NAVIGACE TELEFON ======================= -->
+<section id=" navigace teledon">
 <div class="flex items-center justify-between px-4 py-3 md:hidden bg-white shadow">
   <!-- Logo vlevo -->
   <a href="/" class="font-bold text-black">SADROKARTONY MV</a>
@@ -129,11 +126,16 @@
     }
   });
 </script>
-{% load static %}
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
 
-<!-- ================= DESKTOP HERO ================= -->
-<section class="relative overflow-hidden min-h-[92vh] hidden lg:block">
+
+
+ <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+</section>
+
+
+<!-- ================= UVODNI SEKCE PC ================= -->
+<section id="uvodni pc"
+class="relative overflow-hidden min-h-[92vh] hidden lg:block">
   <img src="{% static 'images/Uvodnifoto.jpg' %}" alt="Sádrokartonové práce"
        class="absolute inset-0 -z-10 w-full h-full object-cover object-top">
 
@@ -174,8 +176,9 @@
 </section>
 
 
-<!-- ================= MOBILE/TABLET HERO ================= -->
-<section class="relative overflow-hidden min-h-[88vh] flex items-center justify-center block lg:hidden px-4">
+<!-- ================= MOBILE/TABLET UVODNI ================= -->
+<section id="uvodni mobil"
+class="relative overflow-hidden min-h-[88vh] flex items-center justify-center block lg:hidden px-4">
   <!-- Obrázek pro mobily/tablety – zdůrazní podhled -->
   <img src="{% static 'images/uvodnimob2.jpg' %}" alt="Sádrokartonářské práce"
        class="absolute inset-0 -z-10 w-full h-full object-cover object-top">
@@ -213,12 +216,7 @@
                   transition duration-200 shadow-md active:scale-[0.99]">
           Poptat realizaci
         </a>
-        <a href="#realizace"
-           class="w-full inline-flex items-center justify-center px-6 py-3 rounded-lg text-base font-semibold text-sky-800
-                  bg-white/95 hover:bg-white focus:outline-none focus:ring-4 focus:ring-sky-200
-                  ring-1 ring-sky-100 transition duration-200">
-          ukázka realizací →
-        </a>
+       
       </div>
 
     </div>
@@ -226,8 +224,8 @@
 </section>
 
 
-<!--Sekce o mne-->
-  </div>
+<!-- ======================= O MNĚ =======================-->
+
 <section id="about" class="py-20 bg-white scroll-mt-24">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="grid grid-cols-12 gap-8 lg:gap-12 items-start">
@@ -297,7 +295,7 @@
 
         <!-- CTA odkaz -->
         <div class="mt-8">
-          <a href="#proc-prave-ja"
+          <a href="#procja"
              class="text-base font-semibold text-gray-900 underline decoration-2 underline-offset-[6px] decoration-sky-700 hover:decoration-gray-900">
             Proč si vybrat právě mě →
           </a>
@@ -305,7 +303,7 @@
       </div>
     </div>
   </div>
-</section>
+
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -328,10 +326,14 @@
     if (txt) animate(txt, ["opacity-0","translate-y-3"], ["opacity-100","translate-y-0"]);
   });
 </script>
-<section id="sluzby" class="py-20 bg-gray-50 scroll-mt-24">
+</section>
+
+<!-- ======================= SLUŽBY ======================= -->
+<section id="sluzby" 
+class="py-20 bg-gray-50 scroll-mt-24">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     
-    <!-- HLAVNÍ NADPIS -->
+    
     <h2 class="text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 mb-12 text-center">
       Moje služby
     </h2>
@@ -341,6 +343,7 @@
     <div class="grid gap-10 md:grid-cols-3">
       
       <!-- 1. SLUŽBA -->
+
       <div class="bg-white rounded-2xl p-8 shadow-md">
         <h3 class="text-2xl font-bold text-gray-900">Montáž sádrokartonu</h3>
         <p class="mt-4 text-gray-700">
@@ -417,10 +420,10 @@
       </div>
 
     </div>
-  </div>
 </section>
 
-<!-- Proč si vybrat právě mě?-->
+
+<!-- ======================= PROČ SI VYBRAT PRÁVĚ MĚ? =======================-->
 <section id="procja" class="relative py-20 bg-white">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -431,15 +434,15 @@
           <div class="relative">
             <img src="{% static 'images/Procja1.jpg' %}" 
                  alt="Proč si vybrat právě mě"
-                 class="hidden w-full h-[650px]object-cover rounded-xl shadow-sm sm:block">
-          </div>
-        
+                 class="w-full h-[650px] object-cover rounded-xl shadow-sm">
+            
+      
             <!-- Přechodový overlay (zleva doprava) -->
             <div class="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-white/95 rounded-xl"></div>
 
             <!-- Nadpis dole vlevo -->
             <div class="absolute bottom-0 left-0 p-6">
-              <h2 class="text-4xl md:text-5xl font-bold text-sky-800 sm:text-white">
+              <h2 class="text-4xl md:text-5xl font-bold text-white">
                 Proč si vybrat právě mě
               </h2>
             </div>
@@ -505,8 +508,10 @@
     </div>
   </div>
 </section>
+
 <!-- ======================= REALIZACE ======================= -->
-<section id="realizace" class="py-12 bg-gray-50 scroll-mt-24">
+<section id="realizace" 
+class="py-12 bg-gray-50 scroll-mt-24">
   <div class="max-w-6xl mx-auto px-6">
     <h2 class="text-3xl font-bold text-center mb-8">Moje realizace</h2>
 
@@ -637,7 +642,7 @@
     </div>
 
   </div>
-</section>
+
 
 <!-- Lightbox (zvětšení fotky) s navigací -->
 <div id="rlz-lightbox" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-[60]">
@@ -739,6 +744,9 @@
 
   lbClose.addEventListener('click', closeLb);
 </script>
+</section>
+
+
 <!-- Kalkulačka
 <section id="kalkulacka" class="py-20 bg-white scroll-mt-24">  
   <div class="max-w-3xl mx-auto px-6 text-center">
@@ -793,7 +801,7 @@
 
     <div id="vysledek" class="mt-6 text-xl font-semibold text-sky-700 text-center"></div>
   </div>
-</section>-->
+
 
 <script>
   function spocitatCenu() {
@@ -829,7 +837,10 @@
     }
   }
 </script>
+</section>-->
 
+
+<!-- ======================= REFERENCE ======================= -->
 <section id="reference" class="py-20 bg-gray-50 scroll-mt-24">
   <div class="max-w-5xl mx-auto px-3">
     <h2 class="text-3xl font-bold text-center mb-12">Spokojení zákazníci</h2>
@@ -865,6 +876,9 @@
     </div>
   </div>
 </section>
+
+
+
 <!-- ======================= KONTAKT ======================= -->
 <section id="kontakt" class="py-12 md:py-20 bg-gray-50">
   <div class="max-w-7xl mx-auto px-6">
@@ -940,6 +954,8 @@
     </div>
   </div>
 </section>
+
+
 <!-- Footer -->
 <footer class="bg-sky-700 text-white py-6">
   <div class="max-w-6xl mx-10 text-sm">
